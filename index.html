@@ -1,0 +1,1442 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>ZipZapBags Store</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: premium monochrome storefront. Announcement bar → header with centred logo + uppercase nav and mega-menu → full-bleed hero carousel → trust bar → category tiles → filterable product grid → editorial split banners → black footer */
+:root{
+  --bg:#FFFFFF; --surface:#FFFFFF; --ink:#0A0A0A; --muted:#6B6B6B; --line:#E4E4E4;
+  --accent:#0A0A0A; --accent-ink:#FFFFFF; --soft:#F3F3F3; --good:#1E6B45;
+  --display:"Josefin Sans","Century Gothic",Futura,sans-serif;
+  --body:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --shadow:0 12px 32px rgba(0,0,0,.12);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0A0A0A; --surface:#121212; --ink:#F5F5F5; --muted:#A3A3A3; --line:#2A2A2A;
+  --accent:#FFFFFF; --accent-ink:#0A0A0A; --soft:#1A1A1A; --good:#6FCF97; --shadow:0 12px 32px rgba(0,0,0,.5); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A0A0A; --surface:#121212; --ink:#F5F5F5; --muted:#A3A3A3; --line:#2A2A2A;
+  --accent:#FFFFFF; --accent-ink:#0A0A0A; --soft:#1A1A1A; --good:#6FCF97; --shadow:0 12px 32px rgba(0,0,0,.5); color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14.5px;line-height:1.55;font-weight:400}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.wrap{max-width:1320px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.caps{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-weight:600}
+
+/* announcement */
+.announce{background:#0A0A0A;color:#FFFFFF;font-size:12px;text-align:center;padding-block:8px;letter-spacing:.06em}
+.announce b{font-weight:600}
+.announce button{background:none;border:0;color:#FFFFFF;text-decoration:underline;font-size:12px;padding:0 0 0 6px}
+
+/* header */
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--surface);border-bottom:1px solid var(--line)}
+.hrow{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding-block:16px 10px}
+.hleft{display:flex;align-items:center;gap:10px;min-width:0}
+.search{position:relative;width:min(260px,100%)}
+.search input{width:100%;padding:8px 10px 8px 32px;border:0;border-bottom:1px solid var(--line);background:transparent;font-size:13px}
+.search svg{position:absolute;left:6px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted)}
+.logo{font-family:var(--display);font-weight:700;font-size:28px;letter-spacing:.22em;text-transform:uppercase;white-space:nowrap;background:none;border:0;padding:0}
+.logo span{font-weight:400}
+.hright{display:flex;justify-content:flex-end;gap:4px}
+.ib{position:relative;border:0;background:none;width:42px;height:42px;display:grid;place-items:center}
+.ib svg{width:21px;height:21px}
+.badge{position:absolute;top:3px;right:2px;background:var(--ink);color:var(--bg);font-size:10px;font-weight:600;min-width:17px;height:17px;border-radius:9px;display:grid;place-items:center;padding:0 4px}
+.burger{display:none}
+nav.main ul{list-style:none;margin:0;padding:0;display:flex;justify-content:center;gap:4px;flex-wrap:wrap}
+nav.main button{background:none;border:0;padding:10px 14px 14px;font-family:var(--display);font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;border-bottom:2px solid transparent}
+nav.main button:hover,nav.main button[aria-expanded="true"]{border-bottom-color:var(--ink)}
+nav.main .sale{color:#B3261E}
+.mega{position:absolute;left:0;right:0;top:100%;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:0 20px 30px rgba(0,0,0,.06)}
+.mega .wrap{display:grid;grid-template-columns:repeat(3,1fr) 1.3fr;gap:32px;padding-block:28px 32px}
+.mega h4{margin:0 0 12px;font-size:12px}
+.mega ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.mega li button{background:none;border:0;padding:0;font-size:14px;color:var(--muted);text-align:left}
+.mega li button:hover{color:var(--ink);text-decoration:underline}
+.mfeat{display:grid;grid-template-columns:140px 1fr;gap:16px;align-items:center;background:var(--soft);padding:14px;border:0;text-align:left}
+.mfeat svg{width:100%}
+.mfeat b{display:block;font-family:var(--display);letter-spacing:.08em;text-transform:uppercase;font-size:14px}
+
+/* hero */
+.hero{position:relative;background:#0A0A0A;color:#FFFFFF;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:24px;min-height:460px;padding-block:40px}
+.hero .eb{font-family:var(--display);letter-spacing:.24em;text-transform:uppercase;font-size:12px;color:#BDBDBD}
+.hero h1{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:clamp(32px,5vw,62px);line-height:1.02;margin:14px 0;text-wrap:balance}
+.hero p{color:#D6D6D6;max-width:40ch;margin:0 0 26px;font-weight:300;font-size:16px}
+.hcta{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--bg);padding:13px 28px;font-family:var(--display);text-transform:uppercase;letter-spacing:.16em;font-weight:600;font-size:12.5px}
+.btn:hover{background:transparent;color:var(--ink)}
+.btn.line{background:transparent;color:var(--ink)}
+.btn.line:hover{background:var(--ink);color:var(--bg)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.inv{background:#FFFFFF;color:#0A0A0A;border-color:#FFFFFF}
+.btn.inv:hover{background:transparent;color:#FFFFFF}
+.tlink{background:none;border:0;padding:0 0 3px;border-bottom:1px solid currentColor;font-family:var(--display);text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:600;color:inherit}
+.hart{display:grid;place-items:center;position:relative}
+.hart .disc{position:absolute;width:78%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#5A5A5A 0,#2A2A2A 45%,#141414 72%)}
+.hart .img{position:relative;width:74%;max-width:420px}
+.hart .img svg{width:100%;height:auto}
+.hart .img.in{animation:slidein .7s cubic-bezier(.2,.7,.2,1)}
+.htxt.in{animation:fadeup .6s ease}
+@keyframes slidein{from{transform:translateX(60px) rotate(8deg);opacity:.2}to{transform:none;opacity:1}}
+@keyframes fadeup{from{transform:translateY(14px);opacity:.3}to{transform:none;opacity:1}}
+.hctrl{position:absolute;left:0;right:0;bottom:20px}
+.hctrl .wrap{display:flex;align-items:center;gap:14px;min-height:0;padding-block:0;grid-template-columns:none}
+.hctrl .num{font-family:var(--display);letter-spacing:.14em;font-size:12px;color:#BDBDBD;font-variant-numeric:tabular-nums}
+.hbar{display:flex;gap:6px;flex:1;max-width:260px}
+.hbar button{flex:1;height:3px;border:0;padding:0;background:#3A3A3A;position:relative;overflow:hidden}
+.hbar button i{position:absolute;inset:0;background:#FFFFFF;transform:scaleX(0);transform-origin:left}
+.hbar button.done i{transform:scaleX(1)}
+.hbar button.on i{animation:fill 5s linear forwards}
+.hero.paused .hbar button.on i{animation-play-state:paused}
+@keyframes fill{to{transform:scaleX(1)}}
+.harr{background:none;border:1px solid #4A4A4A;color:#FFFFFF;width:38px;height:38px;display:grid;place-items:center;font-size:18px}
+.harr:hover{border-color:#FFFFFF}
+
+/* trust */
+.trust{border-bottom:1px solid var(--line)}
+.trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding-block:22px}
+.trust div{display:flex;gap:12px;align-items:center;font-size:13px}
+.trust svg{width:26px;height:26px;flex:none}
+.trust b{display:block;font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;font-size:12.5px}
+.trust small{color:var(--muted)}
+
+/* sections */
+section.blk{padding-block:56px 0}
+.shead{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.shead h2{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:clamp(22px,2.6vw,30px);margin:0}
+.shead p{margin:4px 0 0;color:var(--muted)}
+.tiles{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.tile{border:0;background:var(--soft);padding:16px 12px 18px;display:flex;flex-direction:column;align-items:center;gap:10px;transition:background .25s}
+.tile svg{width:82%;transition:transform .35s ease}
+.tile:hover svg{transform:translateY(-6px) scale(1.04)}
+.tile:hover{background:var(--line)}
+.tile span{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-weight:600;font-size:12.5px}
+
+.shop{display:grid;grid-template-columns:220px 1fr;gap:36px}
+aside.filters{display:flex;flex-direction:column;gap:24px;position:sticky;top:150px;align-self:start}
+.fgroup h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:12px;margin:0 0 12px;font-weight:600;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.swatches{display:flex;flex-wrap:wrap;gap:8px}
+.sw{width:26px;height:26px;border-radius:50%;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--line);padding:0}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink)}
+input[type=range]{width:100%;accent-color:var(--ink)}
+.range-val{font-size:13px;margin-top:4px;font-variant-numeric:tabular-nums}
+label.chk{display:flex;gap:8px;align-items:center;font-size:13.5px;margin-bottom:6px}
+label.chk input{accent-color:var(--ink)}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap;font-size:13px}
+.toolbar .count{color:var(--muted)}
+.active{display:flex;gap:6px;flex-wrap:wrap}
+.pill{border:1px solid var(--line);background:none;padding:4px 10px;font-size:12px}
+.pill::after{content:" ×"}
+select{border:1px solid var(--line);background:var(--surface);padding:8px 10px;font-size:13px}
+.mfilter{display:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:28px 18px}
+.card{display:flex;flex-direction:column;gap:8px;min-width:0}
+.pic{position:relative}
+.thumb{background:var(--soft);aspect-ratio:4/5;max-width:100%;width:100%;display:grid;place-items:center;overflow:hidden;border:0;padding:0;transition:transform .2s ease}
+.thumb svg{width:82%;height:auto;transition:transform .45s ease}
+.card:hover .thumb svg{transform:scale(1.07)}
+.ribbon{position:absolute;top:10px;left:10px;background:var(--surface);font-family:var(--display);text-transform:uppercase;letter-spacing:.12em;font-size:10.5px;font-weight:600;padding:5px 8px}
+.heart{position:absolute;top:6px;right:6px;width:36px;height:36px;border:0;background:none;display:grid;place-items:center;color:var(--ink)}
+.heart svg{width:19px;height:19px}
+.heart[aria-pressed="true"] svg{fill:currentColor}
+.quick{position:absolute;left:10px;right:10px;bottom:10px;opacity:0;transform:translateY(8px);transition:.25s;padding:11px}
+.card:hover .quick,.quick:focus-visible{opacity:1;transform:none}
+@media (hover:none){.quick{opacity:1;transform:none;padding:9px;font-size:11px}}
+.dots{display:flex;gap:6px;margin-top:4px}
+.dots button{width:15px;height:15px;border-radius:50%;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--line);padding:0}
+.dots button[aria-pressed="true"]{box-shadow:0 0 0 1.5px var(--ink)}
+.meta .name{font-family:var(--display);text-transform:uppercase;letter-spacing:.08em;font-weight:600;font-size:14px;display:block}
+.meta .sub{color:var(--muted);font-size:12.5px}
+.price{display:flex;gap:8px;align-items:baseline;font-variant-numeric:tabular-nums;font-size:14px}
+.price s{color:var(--muted);font-size:12.5px}
+.price .off{color:var(--good);font-size:12.5px;font-weight:500}
+.empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted)}
+.reveal{animation:rise .5s ease both}
+@keyframes rise{from{transform:translateY(16px)}to{transform:none}}
+
+.edit{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ed{position:relative;min-height:340px;display:grid;grid-template-columns:1fr 1fr;align-items:center;overflow:hidden;padding:32px}
+.ed.dark{background:#0A0A0A;color:#FFFFFF}
+.ed.light{background:var(--soft)}
+.ed h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.08em;font-weight:700;font-size:clamp(22px,2.4vw,30px);line-height:1.1;margin:8px 0 10px}
+.ed p{margin:0 0 20px;font-weight:300;max-width:30ch}
+.ed .eb{font-family:var(--display);letter-spacing:.2em;text-transform:uppercase;font-size:11.5px;opacity:.75}
+.ed svg{width:100%}
+.ed .art .ph{aspect-ratio:4/5;height:auto}
+.mono-demo{font-family:var(--display);font-size:40px;letter-spacing:.2em;font-weight:700}
+
+.recent{padding-block:48px 0}
+.rrow{display:flex;gap:14px;overflow-x:auto;padding-bottom:6px}
+.rrow button{flex:0 0 150px;border:0;background:var(--soft);padding:10px;text-align:left;font-size:12px}
+.rrow svg{width:100%}
+.rrow b{font-family:var(--display);text-transform:uppercase;letter-spacing:.06em}
+
+footer{background:#0A0A0A;color:#D6D6D6;margin-top:72px}
+footer .cols{display:grid;grid-template-columns:repeat(3,1fr) 1.4fr;gap:32px;padding-block:52px 36px}
+footer h4{color:#FFFFFF;font-family:var(--display);text-transform:uppercase;letter-spacing:.16em;font-size:12.5px;margin:0 0 14px}
+footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+footer li button{background:none;border:0;padding:0;color:#BDBDBD;font-size:13.5px;text-align:left}
+footer li button:hover{color:#FFFFFF;text-decoration:underline}
+.news{display:flex;border-bottom:1px solid #6B6B6B;margin-top:10px}
+.news input{flex:1;min-width:0;background:transparent;border:0;color:#FFFFFF;padding:10px 0}
+.news input::placeholder{color:#8A8A8A}
+.news button{background:none;border:0;color:#FFFFFF;font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:600}
+.fbot{border-top:1px solid #2A2A2A;padding-block:20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:#8A8A8A}
+.fbot .logo{color:#FFFFFF;font-size:20px}
+
+/* drawer / modal */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:40}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--surface);z-index:50;display:flex;flex-direction:column;box-shadow:var(--shadow);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px);transform:translateX(100%);transition:transform .35s ease;visibility:hidden}
+.drawer.open{transform:none;visibility:visible}
+.drawer.left{left:0;right:auto;transform:translateX(-100%);padding-left:env(safe-area-inset-left,0px);padding-right:0}
+.drawer.left.open{transform:none}
+.dhead{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line)}
+.dhead h2{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-weight:700;font-size:16px;margin:0}
+.x{border:0;background:none;width:36px;height:36px;font-size:22px;line-height:1}
+.dbody{flex:1;overflow-y:auto;padding:18px 22px;display:flex;flex-direction:column;gap:16px}
+.mnav button{display:flex;justify-content:space-between;width:100%;background:none;border:0;border-bottom:1px solid var(--line);padding:14px 0;font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-weight:600;font-size:14px}
+.line{display:grid;grid-template-columns:80px 1fr auto;gap:14px;align-items:center}
+.line .mini{background:var(--soft);aspect-ratio:4/5;display:grid;place-items:center}
+.line .mini svg{width:86%}
+.line .info{min-width:0;font-size:13px}
+.line .info b{display:block;font-family:var(--display);text-transform:uppercase;letter-spacing:.06em}
+.line .info small{color:var(--muted)}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);margin-top:6px}
+.qty button{border:0;background:none;width:30px;height:30px}
+.qty span{min-width:22px;text-align:center;font-size:13px;font-variant-numeric:tabular-nums}
+.rm{border:0;background:none;color:var(--muted);font-size:12px;text-decoration:underline}
+.dfoot{border-top:1px solid var(--line);padding:16px 22px;display:flex;flex-direction:column;gap:10px}
+.coupon{display:flex;gap:8px}
+.coupon input{flex:1;min-width:0;border:1px solid var(--line);padding:9px 12px;background:var(--bg);text-transform:uppercase;letter-spacing:.08em}
+.coupon button{border:1px solid var(--ink);background:none;padding:0 16px;font-family:var(--display);text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:600}
+.hint{font-size:12px;color:var(--muted)}
+.gift{border:1px solid var(--line);padding:12px 14px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,background .2s}
+.gift.on{border-color:var(--ink);background:var(--soft)}
+.gift label{display:flex;gap:10px;align-items:center;font-size:13.5px;cursor:pointer}
+.gift label input{accent-color:var(--ink);width:17px;height:17px}
+.gift label b{font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;font-size:12.5px}
+.gift label .fee{margin-left:auto;font-variant-numeric:tabular-nums}
+.gift svg{width:22px;height:22px;flex:none}
+.gift textarea{border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:9px 12px;font:inherit;font-size:13px;resize:vertical;min-height:58px}
+.sum{display:flex;justify-content:space-between;font-size:13.5px;font-variant-numeric:tabular-nums}
+.sum.total{font-size:16px;font-weight:600;border-top:1px solid var(--line);padding-top:10px}
+.sum .g{color:var(--good)}
+.ship-bar{height:3px;background:var(--soft);overflow:hidden}
+.ship-bar i{display:block;height:100%;background:var(--ink);transition:width .3s}
+.modal{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px}
+.mbox{background:var(--surface);max-width:940px;width:100%;max-height:calc(100vh - 32px);overflow-y:auto;display:grid;grid-template-columns:1.1fr 1fr;position:relative;box-shadow:var(--shadow)}
+.mbox .x{position:absolute;top:10px;right:10px;z-index:2}
+.mart{background:var(--soft);display:grid;place-items:center;min-height:380px}
+.mart svg{width:78%}
+.mdet{padding:32px 28px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.mdet h2{font-family:var(--display);text-transform:uppercase;letter-spacing:.08em;font-weight:700;font-size:26px;margin:0;line-height:1.15}
+.eyebrow{font-family:var(--display);text-transform:uppercase;letter-spacing:.16em;font-size:11.5px;color:var(--muted);font-weight:600}
+.stars{font-size:13px;letter-spacing:.1em}
+.stars span{color:var(--muted);letter-spacing:0}
+.specs{display:grid;grid-template-columns:auto 1fr;gap:5px 16px;font-size:13px;margin:0}
+.specs dt{color:var(--muted)}
+.specs dd{margin:0}
+.row2{display:flex;gap:8px}
+.row2 input{flex:1;min-width:0;border:1px solid var(--line);padding:10px 12px;background:var(--bg)}
+.row2 button{border:1px solid var(--line);background:var(--soft);padding:0 14px;font-size:12.5px}
+#iniIn{text-transform:uppercase;letter-spacing:.2em}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form .full{grid-column:1/-1}
+.form label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--muted)}
+.form input{border:1px solid var(--line);padding:10px 12px;background:var(--bg);color:var(--ink)}
+.err{color:#B3261E;font-size:12.5px}
+.pay{display:flex;gap:8px;flex-wrap:wrap}
+.pay label{flex:1;min-width:120px;flex-direction:row;align-items:center;gap:8px;border:1px solid var(--line);padding:10px 12px;color:var(--ink)}
+.pay input{accent-color:var(--ink)}
+.done{text-align:center;padding:32px 10px}
+.done .ok{width:60px;height:60px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-size:26px;margin:0 auto 14px}
+.done code{background:var(--soft);padding:3px 8px;letter-spacing:.08em}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,140px);background:var(--ink);color:var(--bg);padding:12px 20px;font-size:13px;z-index:70;transition:transform .3s;max-width:calc(100% - 32px);text-align:center}
+.toast.show{transform:translate(-50%,0)}
+.flyer{position:fixed;z-index:80;width:70px;height:70px;pointer-events:none;transition:transform .7s cubic-bezier(.5,-.3,.7,1),opacity .7s}
+.flyer svg{width:100%}
+.badge.bump{animation:bump .45s}
+@keyframes bump{50%{transform:scale(1.6)}}
+.totop{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));width:46px;height:46px;border:0;background:var(--ink);color:var(--bg);font-size:18px;z-index:30;box-shadow:var(--shadow)}
+
+.ph{position:relative;display:block;width:100%;height:100%}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph .ini{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);font-family:var(--display);font-weight:700;letter-spacing:.3em;font-size:22px;color:#C9A86A;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.thumb:has(.ph){display:block}
+.card:hover .thumb .ph img{transform:scale(1.05);transition:transform .45s}
+.mart:has(.ph){display:block}
+.mart .ph,.mini .ph,.rrow .ph,.mfeat .ph{aspect-ratio:4/5;height:auto}
+.hart .img .ph{aspect-ratio:4/5;max-height:380px;width:auto;margin:0 auto}
+.hart .img .ph img{box-shadow:0 24px 60px rgba(0,0,0,.55)}
+.hart .img:has(.ph){width:min(64%,330px)}
+.tile .ph{aspect-ratio:1;width:82%;height:auto}
+.flyer .ph{aspect-ratio:1}
+.upbar{position:absolute;left:10px;right:10px;top:50%;transform:translateY(-50%);display:none;flex-direction:column;gap:6px}
+body.editing .upbar{display:flex}
+body.editing .quick{display:none}
+body.editing .thumb{outline:2px dashed var(--ink);outline-offset:-6px}
+.up{padding:10px;text-align:center;cursor:pointer}
+#phMode[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+/* creative hero */
+.hero{isolation:isolate}
+.hbg{position:absolute;inset:0;z-index:-1;display:flex;align-items:center;pointer-events:none;overflow:hidden}
+.hword{display:flex;white-space:nowrap;font-family:var(--display);font-weight:700;font-size:clamp(120px,19vw,300px);line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.12);animation:hscroll 40s linear infinite}
+.hword span{padding-right:.35em}
+@keyframes hscroll{to{transform:translateX(-50%)}}
+.hero .hgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center;min-height:540px;padding-block:44px 28px}
+.hero h1 .w{display:inline-block;animation:wordup .8s cubic-bezier(.2,.7,.2,1) both}
+@keyframes wordup{from{transform:translateY(45%);opacity:0}to{transform:none;opacity:1}}
+.hc2{display:flex;align-items:center;gap:12px;margin-top:34px;flex-wrap:wrap}
+.hc2 .num{font-family:var(--display);letter-spacing:.14em;font-size:12px;color:#BDBDBD;font-variant-numeric:tabular-nums}
+.stage{position:relative;aspect-ratio:1;max-width:500px;width:100%;margin-inline:auto;display:grid;place-items:center}
+.spot{position:absolute;inset:8%;border-radius:50%;background:radial-gradient(circle at 50% 42%,#4a4a4a 0,#1d1d1d 48%,rgba(10,10,10,0) 71%)}
+.orbit{position:absolute;inset:3%;border-radius:50%;border:1px dashed rgba(255,255,255,.2);animation:spin 50s linear infinite}
+.orbit::before{content:"";position:absolute;top:-5px;left:calc(50% - 5px);width:10px;height:10px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 14px #FFFFFF}
+.para{position:relative;width:70%;transform:perspective(900px) translate(calc(var(--mx,0)*28px),calc(var(--my,0)*20px)) rotateY(calc(var(--mx,0)*16deg)) rotateX(calc(var(--my,0)*-12deg));transition:transform .2s ease-out;transform-style:preserve-3d}
+.float{animation:bob 5s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-14px) rotate(-1.5deg)}}
+#himg svg{width:100%;height:auto;filter:drop-shadow(0 28px 26px rgba(0,0,0,.55))}
+#himg .ph{aspect-ratio:4/5;height:auto;width:78%;margin:auto}
+#himg.in{animation:slidein .7s cubic-bezier(.2,.7,.2,1)}
+.badge-ring{position:absolute;top:0;right:2%;width:118px;height:118px;transform:translate(calc(var(--mx,0)*-10px),calc(var(--my,0)*-8px));transition:transform .25s ease-out}
+.badge-ring svg{width:100%;height:100%;animation:spin 18s linear infinite;overflow:visible}
+.badge-ring text{fill:#FFFFFF;font-family:var(--display);font-size:14.5px;letter-spacing:3.2px;font-weight:600}
+.badge-ring b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:22px;letter-spacing:.08em;color:#FFFFFF}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hprice{position:absolute;left:-2%;bottom:12%;background:#FFFFFF;color:#0A0A0A;padding:10px 14px;font-size:13px;box-shadow:0 12px 30px rgba(0,0,0,.45);transform:translate(calc(var(--mx,0)*-12px),calc(var(--my,0)*-6px));transition:transform .25s ease-out;font-variant-numeric:tabular-nums}
+.hprice b{display:block;font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;font-size:11.5px}
+.hprice s{color:#8A8A8A;margin-left:4px}
+.hsw{position:absolute;bottom:3%;left:50%;transform:translateX(-50%);display:flex;gap:9px;align-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:8px 14px;border-radius:999px;backdrop-filter:blur(6px);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-family:var(--display);white-space:nowrap;color:#D6D6D6}
+.hsw button{width:20px;height:20px;border-radius:50%;border:2px solid #0A0A0A;box-shadow:0 0 0 1px rgba(255,255,255,.4);padding:0;transition:transform .2s}
+.hsw button:hover{transform:scale(1.15)}
+.hsw button[aria-pressed="true"]{box-shadow:0 0 0 2px #FFFFFF}
+.zipwrap{border-top:1px solid #222;padding-block:14px}
+.hero .zipwrap .wrap{display:flex;align-items:center;gap:18px;min-height:0;padding-block:0}
+.zipwrap{padding-block:4px;background:linear-gradient(#0A0A0A,#060606)}
+.ziplbl{font-family:var(--display);letter-spacing:.16em;text-transform:uppercase;font-size:11.5px;color:#BDBDBD;white-space:nowrap}
+.ztrack{position:relative;flex:1;height:40px;min-width:0;touch-action:none}
+.zrow{position:absolute;left:0;right:0;height:7px;background:repeating-linear-gradient(90deg,#CDAE6E 0 6px,transparent 6px 10px)}
+.ztrack>.zrow.t{top:13px}.ztrack>.zrow.b{top:20px;background-position:5px 0}
+.zgap{position:absolute;left:0;top:0;bottom:0;width:var(--zp,0%);background:#0A0A0A;overflow:hidden;transition:width .05s}
+.zgap .zrow.t{top:1px}.zgap .zrow.b{bottom:1px;top:auto;background-position:5px 0}
+.zmsg{position:absolute;left:14px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:12px;font-family:var(--display);letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:#FFFFFF}
+.zpull{position:absolute;top:50%;left:var(--zp,0%);transform:translate(-50%,-50%);width:30px;height:42px;border:0;padding:0;background:linear-gradient(#EED9A6,#A9894F);border-radius:7px 7px 14px 14px;cursor:grab;box-shadow:0 4px 12px rgba(0,0,0,.6);transition:left .05s}
+.zpull:active{cursor:grabbing}
+.zpull::after{content:"";position:absolute;left:50%;top:9px;width:8px;height:19px;transform:translateX(-50%);border-radius:4px;background:#0A0A0A}
+.ztrack.hint .zpull{animation:nudge 2.4s ease-in-out infinite}
+@keyframes nudge{0%,70%,100%{margin-left:0}80%{margin-left:14px}90%{margin-left:0}}
+.ztrack.done .zpull{cursor:default}
+.ztrack{height:92px}
+.ztrack canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ztrack .zpull{background:transparent;box-shadow:none;width:72px;height:56px;border-radius:10px;transform:translate(-72%,-50%);animation:none;transition:none}
+.ztrack .zpull::after{display:none}
+.ztrack .zpull:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
+.ztrack.done .zpull{pointer-events:none}
+@media (max-width:860px){
+  .stage{order:-1;max-width:360px}
+  .badge-ring{width:86px;height:86px}
+  .badge-ring b{font-size:16px}
+  .hprice{bottom:auto;top:3%;left:0;font-size:12px;padding:8px 10px}
+  .hword{font-size:36vw}
+  .ziplbl{display:none}
+}
+@media (max-width:1000px){
+  .tiles{grid-template-columns:repeat(3,1fr)}
+  .trust .wrap{grid-template-columns:repeat(2,1fr)}
+  footer .cols{grid-template-columns:1fr 1fr}
+  .mega .wrap{grid-template-columns:repeat(3,1fr)}
+  .mega .mfeat{display:none}
+}
+@media (max-width:860px){
+  nav.main,.search{display:none}
+  .burger{display:grid}
+  .hrow{padding-block:10px}
+  .logo{font-size:21px;letter-spacing:.16em}
+  .hero .wrap{grid-template-columns:1fr;min-height:0;padding-block:28px 20px;text-align:left}
+  .hctrl{position:static;padding-bottom:24px}
+  .hart{order:-1}
+  .hart .img{width:56%}
+  .shop{grid-template-columns:1fr}
+  aside.filters{display:none;position:static}
+  aside.filters.show{display:flex;border:1px solid var(--line);padding:16px}
+  .mfilter{display:inline-block}
+  .edit{grid-template-columns:1fr}
+  .mbox{grid-template-columns:1fr}
+  .mart{min-height:240px}
+}
+@media (max-width:520px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .trust .wrap{grid-template-columns:1fr 1fr;gap:14px}
+  .form{grid-template-columns:1fr}
+  .ed{grid-template-columns:1fr;min-height:0}
+  .ed .art{max-width:200px}
+  footer .cols{grid-template-columns:1fr}
+  .meta .name{font-size:12.5px}
+  .hright .ib.wl{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+
+/* glass buttons: same frosted pill as the hero colour picker */
+:root{--gp-bg:rgba(10,10,10,.06);--gp-bd:rgba(10,10,10,.16);--gp-fg:#0A0A0A;--gp-hover:rgba(10,10,10,.12);--gp-hover-bd:rgba(10,10,10,.32)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--gp-bg:rgba(255,255,255,.08);--gp-bd:rgba(255,255,255,.16);--gp-fg:#F5F5F5;--gp-hover:rgba(255,255,255,.15);--gp-hover-bd:rgba(255,255,255,.34)}}
+:root[data-theme="dark"]{--gp-bg:rgba(255,255,255,.08);--gp-bd:rgba(255,255,255,.16);--gp-fg:#F5F5F5;--gp-hover:rgba(255,255,255,.15);--gp-hover-bd:rgba(255,255,255,.34)}
+.btn,.harr,.coupon button,.row2 button,.pill,.news button,.totop,.heart,.x,.ribbon{-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.btn,.btn:hover,.btn.line,.btn.line:hover{background:var(--gp-bg);color:var(--gp-fg);border:1px solid var(--gp-bd);border-radius:999px;box-shadow:none}
+.btn{transition:background .2s ease,border-color .2s ease,transform .2s ease}
+.btn:hover,.btn.line:hover{background:var(--gp-hover);border-color:var(--gp-hover-bd);transform:translateY(-1px)}
+.btn:active{transform:scale(.98)}
+.btn:disabled,.btn:disabled:hover{opacity:.45;transform:none;background:var(--gp-bg)}
+/* on dark surfaces: exactly the hero picker glass */
+.btn.inv,.hero .btn,.ed.dark .btn,.harr,.news button{background:rgba(255,255,255,.08);color:#FFFFFF;border:1px solid rgba(255,255,255,.16);border-radius:999px;box-shadow:none}
+.btn.inv:hover,.hero .btn:hover,.ed.dark .btn:hover,.harr:hover,.news button:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.34);color:#FFFFFF}
+.ed.light .btn.inv{background:var(--gp-bg);color:var(--gp-fg);border-color:var(--gp-bd)}
+.harr{width:40px;height:40px}
+.news button{padding:7px 16px;margin-bottom:6px}
+/* on product photos */
+.btn.quick,.btn.quick:hover{background:rgba(255,255,255,.55);color:#0A0A0A;border:1px solid rgba(10,10,10,.12)}
+.btn.quick:hover{background:rgba(255,255,255,.75)}
+.heart{background:rgba(255,255,255,.55);border:1px solid rgba(10,10,10,.1);border-radius:50%;color:#0A0A0A;top:10px;right:10px;width:38px;height:38px}
+.ribbon{background:rgba(255,255,255,.55);border:1px solid rgba(10,10,10,.1);border-radius:999px;color:#0A0A0A;padding:5px 10px}
+/* small controls */
+.coupon button,.row2 button,.pill{background:var(--gp-bg);border:1px solid var(--gp-bd);border-radius:999px;color:var(--gp-fg)}
+.coupon button:hover,.row2 button:hover,.pill:hover{background:var(--gp-hover);border-color:var(--gp-hover-bd)}
+.coupon input,.row2 input{border-radius:999px;padding-inline:16px}
+.x{background:var(--gp-bg);border:1px solid var(--gp-bd);border-radius:50%;color:var(--gp-fg)}
+.totop{background:rgba(10,10,10,.55);color:#FFFFFF;border:1px solid rgba(255,255,255,.2);border-radius:50%}
+.mfeat,.tile{border-radius:12px}
+
+/* checkout animation */
+.steps{display:flex;justify-content:space-between;position:relative;padding:12px 22px 14px;border-bottom:1px solid var(--line)}
+.st{position:relative;z-index:1;display:flex;align-items:center;gap:8px;font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:11px;color:var(--muted);background:var(--surface);padding-right:8px}
+.st:last-of-type{padding-right:0;padding-left:8px}
+.st i{font-style:normal;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);font-size:11px;transition:background .4s,color .4s,border-color .4s}
+.st.on{color:var(--ink)}
+.st.on i{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.st.cur i{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(205,174,110,.6)}50%{box-shadow:0 0 0 6px rgba(205,174,110,0)}}
+.sline{position:absolute;left:34px;right:34px;top:50%;height:2px;background:var(--line);transform:translateY(-50%)}
+.sline b{display:block;height:100%;width:0;background:repeating-linear-gradient(90deg,#CDAE6E 0 4px,transparent 4px 7px);transition:width .7s cubic-bezier(.6,0,.3,1)}
+.btn.zipping{pointer-events:none;position:relative;overflow:hidden}
+.btn.zipping span{opacity:.75}
+.btn.zipping::before{content:"";position:absolute;left:0;bottom:5px;height:4px;width:0;background:repeating-linear-gradient(90deg,#CDAE6E 0 4px,transparent 4px 7px);animation:zipfill .75s cubic-bezier(.6,0,.3,1) forwards}
+.btn.zipping::after{content:"";position:absolute;bottom:0;left:0;width:12px;height:14px;margin-left:-6px;border-radius:3px 3px 6px 6px;background:linear-gradient(#EED9A6,#A9894F);box-shadow:0 2px 4px rgba(0,0,0,.4);animation:zipmove .75s cubic-bezier(.6,0,.3,1) forwards}
+@keyframes zipfill{to{width:100%}}
+@keyframes zipmove{to{left:100%}}
+.rise-in{animation:risein .5s cubic-bezier(.2,.7,.2,1) both}
+@keyframes risein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.form input.bad{border-color:#B3261E;animation:shake .4s}
+.btn.nope{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.pack{display:flex;flex-direction:column;align-items:center;gap:14px;padding:26px 0 10px}
+.pk-stage{position:relative;width:190px;height:230px}
+.pk-bag{position:absolute;left:50%;top:0;width:120px;height:120px;margin-left:-60px;z-index:1;animation:pkdrop 1.1s .15s cubic-bezier(.55,0,.8,.3) both}
+.pk-bag svg,.pk-bag .ph{width:100%;height:100%}
+@keyframes pkdrop{0%{transform:translateY(-20px) rotate(-6deg)}55%{transform:translateY(70px) rotate(3deg) scale(.9)}100%{transform:translateY(118px) scale(.7);opacity:0}}
+.pk-box{position:absolute;left:15px;bottom:0;width:160px;height:96px;background:linear-gradient(#1F1F1F,#0A0A0A);border:1px solid #CDAE6E;border-radius:4px;z-index:3;display:grid;place-items:center;box-shadow:0 14px 24px rgba(0,0,0,.25)}
+.pk-box span{font-family:var(--display);font-weight:700;letter-spacing:.2em;color:#CDAE6E;font-size:18px}
+.pk-box .rb-v{position:absolute;left:50%;top:0;bottom:0;width:10px;margin-left:-5px;background:#B3261E;transform:scaleY(0);transform-origin:top;animation:grow .35s 1.75s forwards}
+.pk-flap{position:absolute;bottom:95px;width:80px;height:34px;background:linear-gradient(#2a2a2a,#151515);border:1px solid #CDAE6E;z-index:2}
+.pk-flap.l{left:15px;transform-origin:left bottom;transform:rotate(-125deg);animation:flapl .45s 1.2s cubic-bezier(.5,0,.3,1.4) forwards}
+.pk-flap.r{right:15px;transform-origin:right bottom;transform:rotate(125deg);animation:flapr .45s 1.32s cubic-bezier(.5,0,.3,1.4) forwards}
+@keyframes flapl{to{transform:rotate(0) scaleY(.12)}}
+@keyframes flapr{to{transform:rotate(0) scaleY(.12)}}
+.pk-tape{position:absolute;left:15px;bottom:92px;height:8px;width:0;background:repeating-linear-gradient(90deg,#CDAE6E 0 5px,#A9894F 5px 8px);z-index:4;animation:tape .45s 1.6s ease-out forwards}
+@keyframes tape{to{width:160px}}
+@keyframes grow{to{transform:scaleY(1)}}
+.pk-txt{margin:0;font-family:var(--display);text-transform:uppercase;letter-spacing:.16em;font-size:12.5px;font-weight:600}
+.pk-txt.swap{animation:risein .35s both}
+.pk-bar{width:200px;height:3px;background:var(--line);border-radius:3px;overflow:hidden}
+.pk-bar b{display:block;height:100%;width:0;background:var(--ink);animation:tape2 2.2s linear forwards}
+@keyframes tape2{to{width:100%}}
+.okc{width:72px;height:72px;margin:0 auto 14px;display:block}
+.okc circle{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-dasharray:151;stroke-dashoffset:151;animation:draw .6s ease forwards}
+.okc path{fill:none;stroke:#CDAE6E;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40;animation:draw .4s .5s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.confetti{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+
+#phMode{white-space:nowrap}
+/* animated header: slide-in entrance, glass + shadow once scrolled, gold scroll-progress line, sliding nav indicator, springy icons */
+header.site{animation:hdrin .8s cubic-bezier(.2,.8,.2,1) both;transition:background .35s ease,box-shadow .35s ease}
+@keyframes hdrin{from{transform:translateY(-100%);opacity:0}to{transform:none;opacity:1}}
+header.site.stuck{background:color-mix(in srgb,var(--surface) 82%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);box-shadow:0 10px 30px rgba(0,0,0,.12)}
+header.site::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:100%;transform:scaleX(var(--sp,0));transform-origin:left;background:linear-gradient(90deg,#B8955A,#FFF1C9,#B8955A,#FFF1C9);background-size:300% 100%;animation:goldrun 3.2s linear infinite;pointer-events:none}
+@keyframes goldrun{to{background-position:-300% 0}}
+.logo{position:relative;overflow:hidden;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.logo::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 42%,rgba(201,168,106,.6) 50%,transparent 58%);transform:translateX(-130%);animation:sheen 7s ease-in-out 1.2s infinite;pointer-events:none}
+@keyframes sheen{0%,72%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
+.logo:hover{transform:scale(1.05)}
+header.site.stuck .logo{transform:scale(.82)}
+header.site.stuck .logo:hover{transform:scale(.88)}
+nav.main li{animation:navin .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*70ms + 300ms)}
+@keyframes navin{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+nav.main ul{position:relative}
+nav.main button{transition:transform .3s cubic-bezier(.3,1.5,.5,1),color .25s}
+nav.main button:hover,nav.main button[aria-expanded="true"]{border-bottom-color:transparent;transform:translateY(-2px)}
+.nav-ind{position:absolute;left:0;top:0;height:2px;width:0;background:linear-gradient(90deg,#B8955A,var(--ink),#B8955A);opacity:0;pointer-events:none;transition:transform .45s cubic-bezier(.2,.9,.2,1),width .45s cubic-bezier(.2,.9,.2,1),opacity .25s}
+nav.main .sale{animation:salepulse 2.4s ease-in-out infinite}
+@keyframes salepulse{0%,100%{text-shadow:0 0 0 rgba(179,38,30,0)}50%{text-shadow:0 0 14px rgba(179,38,30,.55)}}
+.ib{border-radius:50%;transition:transform .3s cubic-bezier(.3,1.6,.5,1),background .2s}
+.ib:hover{transform:translateY(-3px) scale(1.12);background:var(--soft)}
+.ib:active{transform:scale(.9)}
+.ib.wig svg{animation:wig .7s ease}
+@keyframes wig{20%{transform:rotate(-16deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(4deg)}}
+.ib.wl:hover svg{animation:beat .7s ease}
+@keyframes beat{25%{transform:scale(1.3)}50%{transform:scale(.95)}75%{transform:scale(1.18)}}
+.search{transition:width .45s cubic-bezier(.2,.8,.2,1)}
+.search:focus-within{width:min(340px,100%)}
+.search::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.search:focus-within::after{transform:scaleX(1)}
+.search:focus-within svg{color:var(--ink)}
+.mega:not([hidden]){animation:megain .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes megain{from{opacity:0;clip-path:inset(0 0 100% 0)}to{opacity:1;clip-path:inset(0 0 -40px 0)}}
+.mega .wrap>*{animation:megacol .55s cubic-bezier(.2,.8,.2,1) both}
+.mega .wrap>*:nth-child(2){animation-delay:70ms}.mega .wrap>*:nth-child(3){animation-delay:140ms}.mega .wrap>*:nth-child(4){animation-delay:210ms}
+@keyframes megacol{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.announce{background:linear-gradient(90deg,#0A0A0A,#262626,#0A0A0A);background-size:200% 100%;animation:goldrun 10s linear infinite}
+@media (prefers-reduced-motion:reduce){header.site,header.site::after,.logo::after,nav.main li,nav.main .sale,.mega:not([hidden]),.mega .wrap>*,.announce,.ib.wig svg,.ib.wl:hover svg{animation:none!important}.nav-ind,.logo,nav.main button,.ib,.search,.search::after{transition:none!important}}
+
+/* hero scroll interaction: JS only sets --p (0 at top → 1 once the hero has scrolled away); every layer moves from it at its own speed */
+.hero{--p:0;--k:1}
+.hero .hbg{translate:calc(var(--p)*-280px*var(--k)) calc(var(--p)*130px*var(--k));scale:calc(1 + var(--p)*.18);opacity:calc(1 - var(--p)*.8);will-change:translate,scale,opacity}
+.hero .hgrid>div:first-child{opacity:calc(1 - var(--p)*1.7);will-change:opacity}
+.hero .htxt>.eb{display:inline-block;translate:calc(var(--p)*-50px*var(--k)) calc(var(--p)*-40px*var(--k))}
+.hero .htxt>h1{translate:calc(var(--p)*-90px*var(--k)) calc(var(--p)*-90px*var(--k))}
+.hero .htxt>p{translate:0 calc(var(--p)*-140px*var(--k))}
+.hero .htxt>.hcta{translate:0 calc(var(--p)*-190px*var(--k))}
+.hero .hc2{translate:0 calc(var(--p)*-220px*var(--k))}
+.hero .stage{translate:0 calc(var(--p)*120px*var(--k));scale:calc(1 - var(--p)*.14);will-change:translate,scale}
+.hero .spot{scale:calc(1 + var(--p)*.55);opacity:calc(1 - var(--p)*.5)}
+.hero .orbit{rotate:calc(var(--p)*180deg)}
+.hero .para{rotate:calc(var(--p)*-14deg);translate:calc(var(--p)*30px*var(--k)) 0}
+.hero .badge-ring{rotate:calc(var(--p)*360deg);translate:calc(var(--p)*40px*var(--k)) calc(var(--p)*-30px*var(--k))}
+.hero .hprice{translate:calc(var(--p)*-60px*var(--k)) calc(var(--p)*40px*var(--k));opacity:calc(1 - var(--p)*1.5)}
+@media (prefers-reduced-motion:reduce){.hero *{translate:none!important;scale:none!important;rotate:none!important}.hero .hbg,.hero .hgrid>div:first-child,.hero .hprice,.hero .spot{opacity:1!important}}
+
+/* store dashboard (admin portal) */
+body.adm{overflow:hidden}
+#adLock{display:none;min-height:100%;place-items:center;padding:24px}
+#admin.locked #adLock{display:grid}
+#admin.locked>:not(#adLock){display:none!important}
+#adLockForm{width:min(380px,100%);text-align:center}
+#adLockForm h2{font-family:var(--display);letter-spacing:.2em;text-transform:uppercase;font-size:15px;margin:0 0 6px}
+#adLockForm p{color:var(--muted);font-size:13.5px;margin:0 0 16px}
+#adLockForm input{width:100%;border:1px solid var(--line);background:var(--surface);padding:12px;font-size:15px;text-align:center;margin-bottom:10px}
+#adLockForm .btn{width:100%;justify-content:center}
+#adLockForm .tlink{margin-top:14px}
+#admin{position:fixed;inset:0;z-index:65;background:var(--bg);color:var(--ink);overflow-y:auto;padding-top:env(safe-area-inset-top,0px)}
+.ad-top{position:sticky;top:0;z-index:3;background:var(--bg);border-bottom:1px solid var(--line)}
+.ad-top .in{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-block:12px}
+.ad-top h2{margin:0;font-family:var(--display);font-size:15px;letter-spacing:.2em;text-transform:uppercase}
+.adt-l{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.ad-chip{font-size:12px;padding:4px 10px;border:1px solid var(--line);color:var(--muted)}
+.ad-chip.dirty{border-color:#B3261E;color:#B3261E}
+.ad-chip.ok{color:var(--good);border-color:var(--good)}
+.ad-top .acts{display:flex;gap:8px;flex-wrap:wrap}
+#admin .btn{padding:10px 18px;font-size:11.5px;cursor:pointer}
+.ad-tabs{display:flex;gap:4px}
+.ad-tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:10px 16px;font-family:var(--display);letter-spacing:.14em;text-transform:uppercase;font-size:12px;font-weight:600;color:var(--muted)}
+.ad-tabs button.on{color:var(--ink);border-bottom-color:var(--ink)}
+.ad-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:20px 0 12px}
+.ad-tools input[type=search]{flex:1;min-width:160px;border:1px solid var(--line);background:var(--surface);padding:10px 12px;font-size:13px}
+.ad-stat{font-size:13px;color:var(--muted);margin-bottom:12px}
+.ad-bulk{margin-bottom:12px;font-size:13px}.ad-bulk summary{cursor:pointer;color:var(--muted)}
+.ad-drop{display:block;border:2px dashed var(--line);padding:16px;text-align:center;font-size:13px;color:var(--muted);cursor:pointer;margin-top:8px}
+.ad-drop b{color:var(--ink)}
+.ad-drop.over,.adc.over{border-color:var(--ink);background:var(--soft)}
+#adMsg{min-height:18px;font-size:13px;margin-bottom:8px}
+.ad-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;padding-bottom:60px}
+.adc{border:1px solid var(--line);background:var(--surface);display:flex;flex-direction:column}
+.adi{position:relative;aspect-ratio:4/5;background:var(--soft);display:grid;place-items:center;overflow:hidden}
+.adi svg{width:78%;height:auto}
+.adst{position:absolute;left:8px;top:8px;font-size:10.5px;font-family:var(--display);letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;background:var(--bg);color:var(--ink);border:1px solid var(--line)}
+.adst.new{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.adst.none{color:var(--muted);top:auto;bottom:8px}
+.adm-info{padding:10px 12px 4px;font-size:13px;line-height:1.35}
+.adm-info small{display:block;color:var(--muted);font-size:11.5px;margin-top:2px}
+.adm-btns{display:flex;gap:6px;flex-wrap:wrap;padding:8px 12px 12px;margin-top:auto}
+.adm-btns .btn{padding:8px 12px;font-size:10.5px;letter-spacing:.1em}
+.ad-sec{max-width:760px;padding:28px 0 60px}
+.ad-sec h3{font-family:var(--display);letter-spacing:.14em;text-transform:uppercase;font-size:14px;margin:28px 0 8px}
+.ad-sec p,.ad-sec li{font-size:13.5px;color:var(--muted)}
+.ad-sec ol{padding-left:20px;margin:6px 0 14px}
+.ad-sec label{display:block;font-size:12.5px;margin:10px 0 4px;font-weight:500}
+.ad-sec input,.adf input:not([type=checkbox]):not([type=file]),.adf select{width:100%;border:1px solid var(--line);background:var(--surface);padding:10px 12px;font-size:13.5px}
+.ad-sec .row3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}
+.ad-sec .big{font-size:14px;margin-top:14px;padding:14px 28px}
+#adLog{margin-top:12px;font-size:13.5px;min-height:20px}
+#adLog.err{color:#B3261E}#adLog.ok{color:var(--good)}
+#adForm{position:fixed;inset:0;z-index:5;display:flex;justify-content:flex-end}
+#adForm[hidden]{display:none}
+.adf-bg{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.adf{position:relative;width:min(480px,100%);background:var(--bg);height:100%;display:flex;flex-direction:column;box-shadow:var(--shadow);animation:drin .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes drin{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+.adf-h{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line)}
+.adf-h h3{margin:0;font-family:var(--display);letter-spacing:.14em;text-transform:uppercase;font-size:14px}
+.adf-b{padding:16px 20px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:12px}
+.adf-b label,.adf-b .lbl{display:block;font-size:12.5px;font-weight:500}
+.adf-b label small{color:var(--muted);font-weight:400}
+.adf-b label input,.adf-b label select{margin-top:4px}
+.adf .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.adf-ph{display:flex;gap:14px;align-items:center}
+.adf-ph .adi{width:120px;flex:none}
+.adf-ph .btn{margin:0 6px 6px 0}
+.hint{font-size:12px;color:var(--muted);margin:4px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chipc{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);padding:6px 10px;font-size:12.5px;border-radius:999px}
+.chipc i{width:12px;height:12px;border-radius:50%;border:1px solid rgba(0,0,0,.2)}
+.chipc[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.adf .tick{display:flex;align-items:center;gap:8px;padding-top:22px}
+.adf .tick input{width:auto}
+.adf-f{display:flex;gap:8px;padding:14px 20px;border-top:1px solid var(--line)}
+.err{color:#B3261E;font-size:13px;min-height:18px}
+@media (max-width:700px){.ad-sec .row3{grid-template-columns:1fr}}
+
+
+</style>
+
+<div class="announce">Festive season: <b>free monogramming</b> on all leather bags · Extra 10% off with code ZIP10 <button id="annBtn">Shop now</button></div>
+
+<header class="site" id="header">
+  <div class="wrap hrow">
+    <div class="hleft">
+      <button class="ib burger" id="burger" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Search bags" aria-label="Search bags">
+      </div>
+    </div>
+    <button class="logo" id="logo" aria-label="ZipZapBags home">ZipZap<span>Bags</span></button>
+    <div class="hright">
+      <button class="ib" id="mSearch" aria-label="Search" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="ib wl" id="wishBtn" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span class="badge" id="wishCount">0</span></button>
+      <button class="ib" id="cartBtn" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1 13H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="badge" id="cartCount">0</span></button>
+    </div>
+  </div>
+  <nav class="main" aria-label="Main"><ul id="navList"></ul></nav>
+  <div class="mega" id="mega" hidden><div class="wrap" id="megaIn"></div></div>
+</header>
+
+<section class="hero" id="hero" aria-roledescription="carousel">
+  <div class="hbg" aria-hidden="true"><div class="hword" id="hword"></div></div>
+  <div class="wrap hgrid">
+    <div>
+      <div class="htxt" id="htxt"></div>
+      <div class="hc2">
+        <span class="num" id="hnum">01 / 04</span>
+        <div class="hbar" id="hbar"></div>
+        <button class="harr" id="hPrev" aria-label="Previous slide">‹</button>
+        <button class="harr" id="hNext" aria-label="Next slide">›</button>
+        <button class="harr" id="hPause" aria-label="Pause slideshow">❚❚</button>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="spot"></div><div class="orbit"></div>
+      <div class="badge-ring" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#circ" textLength="480" lengthAdjust="spacing">HANDCRAFTED IN INDIA • FREE MONOGRAM • </textPath></text></svg><b>ZZ</b></div>
+      <div class="para"><div class="float"><div id="himg"></div></div></div>
+      <div class="hprice" id="hprice"></div>
+      <div class="hsw" id="hsw"></div>
+    </div>
+  </div>
+  <div class="zipwrap"><div class="wrap">
+    <span class="ziplbl" id="zipLbl">Unzip your festive offer →</span>
+    <div class="ztrack" id="ztrack">
+      <canvas id="zcv" aria-hidden="true"></canvas>
+      <button class="zpull" id="zpull" aria-label="Drag or press to unzip the festive offer"></button>
+    </div>
+    <button class="btn inv" id="zCopy" style="padding:10px 16px" hidden>Copy ZIP10</button>
+  </div></div>
+</section>
+
+<div class="trust"><div class="wrap">
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 6h12v10H2zM14 9h4l3 3v4h-7"/><circle cx="6" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span><b>Free shipping</b><small>On orders over ₹1,999</small></span></div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg><span><b>1-year warranty</b><small>On every stitch and zip</small></span></div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 6l3 3"/></svg><span><b>Free monogram</b><small>Initials on leather bags</small></span></div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg><span><b>15-day returns</b><small>Easy doorstep pickup</small></span></div>
+</div></div>
+
+<section class="blk"><div class="wrap">
+  <div class="shead"><div><h2>Shop your favourites</h2><p>Find the right bag for work, travel and weekends.</p></div></div>
+  <div class="tiles" id="tiles"></div>
+</div></section>
+
+<section class="blk" id="shop"><div class="wrap">
+  <div class="shead"><div><h2 id="shopTitle">All bags</h2><p id="shopSub">Handcrafted in full-grain leather, waxed canvas, recycled nylon and vegan leather.</p></div></div>
+  <div class="shop">
+    <aside class="filters" id="filters">
+      <div class="fgroup"><h3>Category</h3><div id="catChecks"></div></div>
+      <div class="fgroup"><h3>Price</h3>
+        <input type="range" id="price" min="500" max="7000" step="100" value="7000" aria-label="Maximum price">
+        <div class="range-val" id="priceVal">Up to ₹7,000</div></div>
+      <div class="fgroup"><h3>Colour</h3><div class="swatches" id="swatches"></div></div>
+      <div class="fgroup"><h3>Material</h3><div id="materials"></div></div>
+      <div class="fgroup"><h3>More</h3>
+        <label class="chk"><input type="checkbox" id="onSale"> On sale</label>
+        <label class="chk"><input type="checkbox" id="inStock"> In stock</label></div>
+      <button class="btn line" id="reset">Clear all</button>
+    </aside>
+    <div style="min-width:0">
+      <div class="toolbar">
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn line mfilter" id="mfilter" style="padding:8px 14px">Filters</button><span class="count" id="count"></span><div class="active" id="active"></div></div>
+        <div style="display:flex;gap:8px;align-items:center">
+        <select id="sort" aria-label="Sort products">
+          <option value="pop">Sort: Featured</option>
+          <option value="new">Newest</option>
+          <option value="lo">Price: low to high</option>
+          <option value="hi">Price: high to low</option>
+          <option value="rate">Top rated</option>
+        </select></div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="blk"><div class="wrap edit">
+  <div class="ed dark">
+    <div><span class="eb">Personalisation</span><h3>Make it yours</h3><p>Add up to three initials to any leather bag, free. Preview them live before you order.</p><button class="btn inv" id="edMono">Try monogramming</button></div>
+    <div class="art" id="edArt1"></div>
+  </div>
+  <div class="ed light">
+    <div><span class="eb">The gift edit</span><h3>Gifts under ₹1,999</h3><p>Wallets, card holders and clutches, wrapped free with a handwritten note.</p><button class="btn" id="edGift">Shop gifts</button></div>
+    <div class="art" id="edArt2"></div>
+  </div>
+</div></section>
+
+<section class="recent wrap" id="recent" hidden>
+  <div class="shead"><h2 style="font-size:20px">Recently viewed</h2></div>
+  <div class="rrow" id="rrow"></div>
+</section>
+
+<footer><div class="wrap">
+  <div class="cols">
+    <div><h4>Customer care</h4><ul><li><button data-t>Shipping</button></li><li><button data-t>Returns &amp; exchanges</button></li><li><button data-t>Warranty &amp; repairs</button></li><li><button data-t>Track your order</button></li><li><button data-t>FAQs</button></li></ul></div>
+    <div><h4>About ZipZapBags</h4><ul><li><button data-t>Our story</button></li><li><button data-t>Craftsmanship</button></li><li><button data-t>Sustainability</button></li><li><button data-t>Personalisation</button></li><li><button data-t>Privacy policy</button></li></ul></div>
+    <div><h4>My account</h4><ul><li><button data-t>Sign in</button></li><li><button data-t>Orders</button></li><li><button id="fWish">Wishlist</button></li><li><button data-t>Register a product</button></li></ul></div>
+    <div><h4>Join the list</h4><p style="margin:0;font-size:13.5px">New collections, early sale access and care tips. No spam.</p>
+      <form class="news" id="news" novalidate><input id="newsMail" type="email" placeholder="Your email address" aria-label="Email address"><button>Sign up</button></form>
+      <div class="err" id="newsErr" style="margin-top:6px"></div></div>
+  </div>
+  <div class="fbot"><span class="logo">ZipZap<span>Bags</span></span><span>© 2026 ZipZapBags · Demo storefront, no real orders or payments</span></div>
+</div></footer>
+
+<div class="overlay" id="overlay" hidden></div>
+<aside class="drawer" id="drawer" aria-label="Shopping bag">
+  <div class="dhead"><h2 id="dTitle">Your bag</h2><button class="x" id="closeCart" aria-label="Close">×</button></div>
+  <div class="steps" id="steps" hidden><div class="st" data-s="1"><i>1</i>Bag</div><div class="st" data-s="2"><i>2</i>Details</div><div class="st" data-s="3"><i>3</i>Done</div><span class="sline"><b id="sfill"></b></span></div>
+  <div class="dbody" id="dbody"></div>
+  <div class="dfoot" id="dfoot"></div>
+</aside>
+<aside class="drawer left" id="menu" aria-label="Menu">
+  <div class="dhead"><span class="logo" style="font-size:18px">ZipZap<span>Bags</span></span><button class="x" id="closeMenu" aria-label="Close menu">×</button></div>
+  <div class="dbody">
+    <div class="row2"><input id="q2" type="search" placeholder="Search bags" aria-label="Search bags"></div>
+    <div class="mnav" id="mnav"></div>
+  </div>
+</aside>
+<div class="modal" id="modal" hidden><div class="overlay" id="mOverlay" style="z-index:-1"></div><div class="mbox" id="mbox"></div></div>
+<div id="admin" hidden role="dialog" aria-modal="true" aria-label="Store dashboard">
+  <div id="adLock"><form id="adLockForm" autocomplete="off"><h2>Store dashboard</h2><p>Enter your password to continue.</p>
+    <input type="password" id="adPw" autocomplete="current-password" aria-label="Password" placeholder="Password"><button class="btn" type="submit">Unlock</button>
+    <div class="err" id="adLockErr" role="alert"></div><button type="button" class="tlink" id="adLockClose">Back to shop</button></form></div>
+  <div class="ad-top"><div class="wrap in">
+    <div class="adt-l"><h2>Store dashboard</h2><span class="ad-chip" id="adChip"></span></div>
+    <div class="acts"><button class="btn" id="adPub">Publish to website</button><button class="btn line" id="adClose">Close ✕</button><button class="btn line" id="adLockBtn">Lock</button></div></div>
+    <div class="wrap"><div class="ad-tabs" role="tablist"><button class="on" data-tab="products" role="tab">Products</button><button data-tab="publish" role="tab">Publish &amp; setup</button></div></div>
+  </div>
+  <div class="wrap">
+    <section id="adP">
+      <div class="ad-tools"><button class="btn" id="adAdd">+ Add new product</button><input type="search" id="adQ" placeholder="Search products" aria-label="Search products"><select id="adCat" aria-label="Category"></select></div>
+      <div class="ad-stat" id="adStat"></div>
+      <details class="ad-bulk"><summary>Upload many photos at once</summary>
+        <label class="ad-drop" id="adDrop"><b>Drop images here</b> or click to choose them.<br>Name each file with the product number or name (e.g. <b>4.jpg</b> or <b>heritage-rucksack.jpg</b>).<input type="file" accept="image/*" multiple hidden id="adBulk"></label></details>
+      <div id="adMsg" role="status"></div>
+      <div class="ad-grid" id="adList"></div>
+    </section>
+    <section id="adS" class="ad-sec" hidden>
+      <h3>Publish your changes</h3>
+      <p>Everything you change here is saved in this browser first, so you can check it on the shop. Press <b>Publish to website</b> when you are happy and everyone will see it within 1–2 minutes.</p>
+      <button class="btn big" id="adPub2">Publish to website</button>
+      <div id="adLog" role="status"></div>
+      <h3>One-time setup</h3>
+      <p>Publishing needs a GitHub access key. You only do this once on each computer:</p>
+      <ol><li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → new access token</a> and sign in.</li>
+        <li>Name it <b>ZipZapBags dashboard</b> and choose the longest expiry.</li>
+        <li>Under <b>Repository access</b> pick <b>Only select repositories</b> and choose your website repository.</li>
+        <li>Under <b>Repository permissions</b> set <b>Contents</b> to <b>Read and write</b>.</li>
+        <li>Click <b>Generate token</b>, copy it, paste it below and press <b>Save setup</b>.</li></ol>
+      <div class="row3"><div><label for="ghRepo">Repository (owner/name)</label><input id="ghRepo" autocomplete="off"></div><div><label for="ghBranch">Branch</label><input id="ghBranch" autocomplete="off"></div><div><label for="ghPath">File</label><input id="ghPath" autocomplete="off"></div></div>
+      <label for="ghToken">Access token</label><input id="ghToken" type="password" autocomplete="off" placeholder="github_pat_…">
+      <p style="margin-top:6px">The token stays only in this browser. Never share it with anyone.</p>
+      <button class="btn" id="ghSave">Save setup</button> <button class="btn line" id="ghTest">Test connection</button>
+      <h3>Change dashboard password</h3>
+      <p>Choose a password only you know (at least 8 characters). Press <b>Publish</b> afterwards so it works on every computer.</p>
+      <div class="row3"><div><label for="pwNew">New password</label><input id="pwNew" type="password" autocomplete="new-password"></div><div><label for="pwNew2">Repeat it</label><input id="pwNew2" type="password" autocomplete="new-password"></div><div><label>&nbsp;</label><button class="btn" id="pwSave" style="width:100%">Change password</button></div></div>
+      <h3>Prefer to upload manually?</h3>
+      <p>Download the updated website file and upload it to GitHub yourself as <b>index.html</b>.</p>
+      <button class="btn line" id="adDl">Download website file</button>
+    </section>
+  </div>
+  <div id="adForm" hidden></div>
+</div>
+<div class="toast" id="toast"></div>
+<button class="totop" id="totop" aria-label="Back to top" hidden>↑</button>
+
+<script>
+const SRC="<!doctype html>"+document.documentElement.outerHTML;
+const INR=n=>"₹"+Math.round(n).toLocaleString("en-IN");
+const COLORS={Tan:"#B07A45",Black:"#23211F",Olive:"#6B7046",Navy:"#24344F",Oxblood:"#6E2230",Mustard:"#C9962B",Sand:"#D8C3A0",Sage:"#9AAE95",Blush:"#D9A3A0",Grey:"#7E8584"};
+const CATS=["Totes","Backpacks","Sling Bags","Laptop Bags","Duffels","Clutches","Wallets"];
+const TYPE={"Totes":"tote","Backpacks":"backpack","Sling Bags":"sling","Laptop Bags":"laptop","Duffels":"duffel","Clutches":"clutch","Wallets":"wallet"};
+const DATA_V="v1";
+const ADMIN_KEY="manage-n2tttiac";
+const ADMIN_AUTH={"s":"b8280e15b4073a9e1c0020520ce8432b","h":"082a548262997b2ea6251e9b59256ab7fd486f1062ad2c50ad8352101916bd05","i":150000};
+const P=[
+ {id:1,name:"Arya Everyday Tote",cat:"Totes",mat:"Full-grain leather",price:3499,mrp:4499,colors:["Tan","Black","Oxblood"],rate:4.7,rev:412,pop:98,new:3,stock:12,dim:"40 × 32 × 14 cm",fits:'Fits 14" laptop'},
+ {id:2,name:"Kora Canvas Shopper",cat:"Totes",mat:"Waxed canvas",price:1299,mrp:1299,colors:["Sand","Olive","Navy"],rate:4.5,rev:230,pop:80,new:9,stock:30,dim:"42 × 36 × 12 cm",fits:"Groceries, gym kit"},
+ {id:3,name:"Ridge Daypack 22L",cat:"Backpacks",mat:"Recycled nylon",price:2499,mrp:2999,colors:["Black","Olive","Grey"],rate:4.6,rev:518,pop:95,new:5,stock:20,dim:"46 × 30 × 16 cm",fits:'Padded 15.6" sleeve'},
+ {id:4,name:"Heritage Rucksack",cat:"Backpacks",mat:"Full-grain leather",price:5999,mrp:6999,colors:["Tan","Oxblood","Black"],rate:4.8,rev:144,pop:70,new:1,stock:4,dim:"44 × 31 × 15 cm",fits:'Fits 15" laptop'},
+ {id:5,name:"Metro Commuter Pack",cat:"Backpacks",mat:"Vegan leather",price:2199,mrp:2199,colors:["Black","Navy","Sage"],rate:4.3,rev:96,pop:60,new:2,stock:0,dim:"43 × 29 × 13 cm",fits:'Fits 14" laptop'},
+ {id:6,name:"Pebble Crossbody",cat:"Sling Bags",mat:"Vegan leather",price:1499,mrp:1999,colors:["Blush","Black","Sand"],rate:4.4,rev:301,pop:88,new:6,stock:18,dim:"22 × 16 × 7 cm",fits:"Phone, keys, cards"},
+ {id:7,name:"Trail Sling",cat:"Sling Bags",mat:"Recycled nylon",price:999,mrp:1299,colors:["Olive","Black","Mustard"],rate:4.2,rev:174,pop:76,new:8,stock:25,dim:"30 × 15 × 8 cm",fits:"Phone, power bank"},
+ {id:8,name:"Saddle Messenger",cat:"Sling Bags",mat:"Full-grain leather",price:3999,mrp:3999,colors:["Tan","Oxblood"],rate:4.7,rev:88,pop:65,new:4,stock:7,dim:"34 × 26 × 9 cm",fits:"iPad, A4 files"},
+ {id:9,name:"Boardroom Laptop Brief",cat:"Laptop Bags",mat:"Full-grain leather",price:4799,mrp:5999,colors:["Black","Tan"],rate:4.8,rev:207,pop:90,new:7,stock:9,dim:"41 × 30 × 9 cm",fits:'Fits 15.6" laptop'},
+ {id:10,name:"Flux Laptop Sleeve",cat:"Laptop Bags",mat:"Waxed canvas",price:1199,mrp:1199,colors:["Grey","Navy","Sand"],rate:4.4,rev:155,pop:72,new:10,stock:40,dim:"37 × 26 × 3 cm",fits:'Fits 14" laptop'},
+ {id:11,name:"Marigold Weekender",cat:"Duffels",mat:"Waxed canvas",price:4299,mrp:4999,colors:["Black","Mustard","Olive","Navy"],rate:4.9,rev:263,pop:99,new:2,stock:11,dim:"55 × 28 × 26 cm · 40L",fits:"2–3 day trip"},
+ {id:12,name:"Gymnast Duffel",cat:"Duffels",mat:"Recycled nylon",price:1799,mrp:2299,colors:["Black","Grey","Sage"],rate:4.3,rev:119,pop:68,new:11,stock:22,dim:"50 × 25 × 25 cm · 30L",fits:"Shoe compartment"},
+ {id:13,name:"Noor Evening Clutch",cat:"Clutches",mat:"Vegan leather",price:1599,mrp:1999,colors:["Oxblood","Black","Blush"],rate:4.5,rev:134,pop:74,new:1,stock:15,dim:"26 × 14 × 4 cm",fits:"Phone, lipstick, cards"},
+ {id:14,name:"Zari Envelope Clutch",cat:"Clutches",mat:"Waxed canvas",price:899,mrp:899,colors:["Mustard","Sage","Sand"],rate:4.1,rev:58,pop:50,new:12,stock:3,dim:"24 × 13 × 3 cm",fits:"Phone, cards"},
+ {id:15,name:"Bifold Classic Wallet",cat:"Wallets",mat:"Full-grain leather",price:1199,mrp:1499,colors:["Tan","Black","Navy"],rate:4.6,rev:640,pop:93,new:6,stock:50,dim:"11.5 × 9 × 2 cm",fits:"8 cards, RFID safe"},
+ {id:16,name:"Slim Card Holder",cat:"Wallets",mat:"Vegan leather",price:699,mrp:799,colors:["Black","Sage","Blush","Oxblood"],rate:4.4,rev:322,pop:84,new:3,stock:60,dim:"10 × 7 × 0.6 cm",fits:"6 cards"}
+];
+(()=>{try{if(localStorage.getItem("zz_base")!==DATA_V){["zz_products","zz_photos","zz_prem","zz_dirty","zz_auth"].forEach(k=>localStorage.removeItem(k));localStorage.setItem("zz_base",DATA_V)}else{const d=JSON.parse(localStorage.getItem("zz_products")||"null");if(Array.isArray(d)&&d.length){P.length=0;d.forEach(x=>P.push(x))}}}catch(e){}})();
+const leather=p=>p.mat==="Full-grain leather";
+
+// ---------- illustrations ----------
+function shade(hex,amt){const n=parseInt(hex.slice(1),16);const c=v=>Math.max(0,Math.min(255,v));return"#"+((1<<24)+(c((n>>16)+amt)<<16)+(c(((n>>8)&255)+amt)<<8)+c((n&255)+amt)).toString(16).slice(1)}
+const INI_Y={tote:132,backpack:150,sling:152,laptop:138,duffel:124,clutch:146,wallet:110};
+function bag(type,hex,ini){
+  const d=shade(hex,-40),l=shade(hex,30),m="#C9A86A";
+  const g={
+  tote:`<path d="M72 78 C72 40 128 40 128 78" fill="none" stroke="${d}" stroke-width="7" stroke-linecap="round"/><path d="M52 78 H148 L160 172 H40 Z" fill="${hex}"/><path d="M52 78 H148 L150 92 H50 Z" fill="${d}" opacity=".35"/>`,
+  backpack:`<path d="M84 52 C84 36 116 36 116 52" fill="none" stroke="${d}" stroke-width="6"/><rect x="56" y="50" width="88" height="124" rx="30" fill="${hex}"/><rect x="70" y="110" width="60" height="50" rx="12" fill="${d}" opacity=".45"/><path d="M70 122 H130" stroke="${l}" stroke-width="2"/><path d="M60 92 C80 80 120 80 140 92" fill="none" stroke="${d}" stroke-width="2" opacity=".6"/>`,
+  sling:`<path d="M54 96 C40 30 160 30 146 96" fill="none" stroke="${d}" stroke-width="5"/><rect x="50" y="92" width="100" height="72" rx="16" fill="${hex}"/><path d="M50 108 C50 96 58 92 66 92 H134 C142 92 150 96 150 108 V128 H50 Z" fill="${d}" opacity=".4"/><circle cx="100" cy="128" r="5" fill="${m}"/>`,
+  laptop:`<path d="M80 72 C80 54 120 54 120 72" fill="none" stroke="${d}" stroke-width="7"/><rect x="30" y="72" width="140" height="96" rx="12" fill="${hex}"/><path d="M40 88 H160" stroke="${d}" stroke-width="2" opacity=".6"/><rect x="92" y="80" width="16" height="6" rx="2" fill="${m}"/>`,
+  duffel:`<path d="M70 96 C70 60 130 60 130 96" fill="none" stroke="${d}" stroke-width="7"/><rect x="24" y="92" width="152" height="72" rx="36" fill="${hex}"/><ellipse cx="40" cy="128" rx="10" ry="30" fill="${d}" opacity=".4"/><ellipse cx="160" cy="128" rx="10" ry="30" fill="${d}" opacity=".4"/><path d="M50 104 H150" stroke="${l}" stroke-width="2"/>`,
+  clutch:`<rect x="38" y="86" width="124" height="68" rx="10" fill="${hex}"/><path d="M38 96 C38 90 42 86 48 86 H152 C158 86 162 90 162 96 L100 128 Z" fill="${d}" opacity=".5"/><circle cx="100" cy="126" r="6" fill="${m}"/>`,
+  wallet:`<rect x="52" y="70" width="96" height="72" rx="10" fill="${hex}"/><path d="M100 70 V142" stroke="${d}" stroke-width="2" opacity=".5"/><rect x="104" y="96" width="44" height="22" rx="8" fill="${d}" opacity=".5"/><circle cx="136" cy="107" r="4" fill="${m}"/>`
+  }[type];
+  const x=type==="wallet"?76:100;
+  const t=ini?`<text x="${x}" y="${INI_Y[type]}" text-anchor="middle" font-family="Josefin Sans,Century Gothic,sans-serif" font-weight="700" font-size="${type==="wallet"?13:17}" letter-spacing="3" fill="${m}">${ini}</text>`:"";
+  return `<svg viewBox="0 0 200 200" aria-hidden="true"><ellipse cx="100" cy="182" rx="66" ry="7" fill="#000" opacity=".12"/>${g}${t}</svg>`;
+}
+
+// ---------- product images ----------
+const IMG={};
+const PIMG={};;
+// ---------- product photos ----------
+let PH={};try{PH=JSON.parse(localStorage.getItem("zz_photos"))||{}}catch(e){}
+let PREM=[];try{PREM=JSON.parse(localStorage.getItem("zz_prem"))||[]}catch(e){}PREM.forEach(i=>{delete PIMG[i]});
+const savePrem=()=>{try{localStorage.setItem("zz_prem",JSON.stringify(PREM))}catch(e){}};
+const photoCount=()=>P.filter(x=>PH[x.id]||PIMG[x.id]).length;
+const HEXN=Object.fromEntries(Object.entries(COLORS).map(([n,h])=>[h,n]));
+function art(p,hex,ini){const src=PH[p.id]||PIMG[p.id]||IMG[TYPE[p.cat]+"|"+(HEXN[hex]||p.colors[0])];if(!src)return bag(TYPE[p.cat],hex,ini);
+  return `<span class="ph"><img src="${src}" alt="${p.name}">${ini?`<span class="ini">${ini}</span>`:""}</span>`}
+function tileArt(c,col){const p=P.find(x=>x.cat===c&&(PH[x.id]||PIMG[x.id]));if(p)return art(p);const src=IMG[TYPE[c]+"|"+col];return src?`<span class="ph"><img src="${src}" alt="${c}"></span>`:bag(TYPE[c],COLORS[col])}
+function savePhotos(){try{localStorage.setItem("zz_photos",JSON.stringify(PH));return true}catch(e){toast("Photo shown for this visit only: your browser couldn't save it.");return false}}
+function shrink(file){return new Promise((ok,bad)=>{const r=new FileReader();r.onerror=bad;r.onload=()=>{const im=new Image();im.onerror=bad;im.onload=()=>{
+  const W=720,H=900,c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");x.fillStyle="#F3F3F3";x.fillRect(0,0,W,H);
+  const sc=Math.max(W/im.width,H/im.height),w=im.width*sc,h=im.height*sc;x.drawImage(im,(W-w)/2,(H-h)/2,w,h);ok(c.toDataURL("image/jpeg",.8))};im.src=r.result};r.readAsDataURL(file)})}
+function refreshArt(){render();slide(hi);$("#tiles").innerHTML=TILES.map(([c,col])=>`<button class="tile" data-go='${JSON.stringify({cats:[c]})}'>${tileArt(c,col)}<span>${c}</span></button>`).join("");drawRecent();if(!$("#admin").hidden)adminList()}
+async function setPhoto(id,file){
+  if(!file||!file.type.startsWith("image/")){toast("Choose an image file (JPG, PNG or WebP).");return false}
+  try{PH[id]=await shrink(file);PREM=PREM.filter(x=>x!==id);savePrem();return true}catch(err){toast("That image couldn't be read. Try another file.");return false}}
+document.addEventListener("change",async e=>{const inp=e.target.closest("[data-up]");if(!inp||!inp.files[0])return;const id=+inp.dataset.up;
+  if(await setPhoto(id,inp.files[0])){markDirty();if(savePhotos())toast("Photo added to "+P.find(x=>x.id===id).name)}refreshArt();inp.value=""});
+document.addEventListener("click",e=>{const r=e.target.closest("[data-unph]");if(!r)return;const id=+r.dataset.unph;
+  if(PH[id])delete PH[id];else if(PIMG[id]){delete PIMG[id];PREM.push(id);savePrem()}
+  markDirty();savePhotos();refreshArt();toast("Photo removed")});
+
+// ---------- state ----------
+const store={get(k,f){try{return JSON.parse(localStorage.getItem(k))??f}catch(e){return f}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let cart=store.get("zz_cart2",[]),wish=store.get("zz_wish",[]),recent=store.get("zz_recent",[]),coupon=null,gift=false,giftMsg="";
+const GIFT_FEE=150;
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+const sel={};
+const calm=()=>matchMedia("(prefers-reduced-motion:reduce)").matches;
+let PMAX=Math.max(7000,Math.ceil(Math.max(0,...P.map(p=>p.price))/500)*500);
+const st={cats:new Set(),q:"",min:0,max:PMAX,colors:new Set(),mats:new Set(),sale:false,stock:false,sort:"pop",wishOnly:false,title:"All bags"};
+const $=s=>document.querySelector(s);
+const disc=p=>Math.round((1-p.price/p.mrp)*100);
+const MATS=[...new Set(P.map(p=>p.mat))];
+$("#price").max=PMAX;
+
+// ---------- nav + mega ----------
+const NAV=[
+ {l:"New arrivals",a:{sort:"new",title:"New arrivals"},f:13},
+ {l:"Backpacks",a:{cats:["Backpacks"]},f:4},
+ {l:"Bags",a:{cats:["Totes","Sling Bags","Clutches"],title:"Bags"},f:1},
+ {l:"Work",a:{cats:["Laptop Bags"],title:"Work bags"},f:9},
+ {l:"Travel",a:{cats:["Duffels"],title:"Travel"},f:11},
+ {l:"Accessories",a:{cats:["Wallets"],title:"Accessories"},f:15},
+ {l:"Gifting",a:{max:1999,title:"Gifts under ₹1,999"},f:16},
+ {l:"Sale",a:{sale:true,sort:"hi",title:"Sale"},f:9,cls:"sale"}
+];
+$("#navList").innerHTML=NAV.map((n,i)=>`<li><button data-nav="${i}" aria-expanded="false" class="${n.cls||""}">${n.l}</button></li>`).join("");
+$("#mnav").innerHTML=NAV.map((n,i)=>`<button data-nav="${i}">${n.l}<span>›</span></button>`).join("");
+function mega(i){const n=NAV[i],f=P.find(p=>p.id===n.f);
+  $("#megaIn").innerHTML=`
+   <div><h4 class="caps">Shop by type</h4><ul>${CATS.map(c=>`<li><button data-go='${JSON.stringify({cats:[c]})}'>${c}</button></li>`).join("")}</ul></div>
+   <div><h4 class="caps">Shop by material</h4><ul>${MATS.map(m=>`<li><button data-go='${JSON.stringify({mats:[m],title:m})}'>${m}</button></li>`).join("")}</ul></div>
+   <div><h4 class="caps">Shop by price</h4><ul>
+     <li><button data-go='${JSON.stringify({max:999,title:"Under ₹1,000"})}'>Under ₹1,000</button></li>
+     <li><button data-go='${JSON.stringify({min:1000,max:2999,title:"₹1,000 – ₹2,999"})}'>₹1,000 – ₹2,999</button></li>
+     <li><button data-go='${JSON.stringify({min:3000,title:"₹3,000 and above"})}'>₹3,000 and above</button></li>
+     <li><button data-go='${JSON.stringify({sale:true,title:"Sale"})}'>On sale</button></li></ul></div>
+   <button class="mfeat" data-open="${f.id}">${art(f,COLORS[f.colors[0]])}<span><span class="eyebrow">Featured in ${n.l}</span><b>${f.name}</b>${INR(f.price)}<br><span class="tlink" style="display:inline-block;margin-top:10px">View bag</span></span></button>`;
+  document.querySelectorAll("#navList [data-nav]").forEach(b=>b.setAttribute("aria-expanded",b.dataset.nav==i));
+  $("#mega").hidden=false}
+function closeMega(){$("#mega").hidden=true;document.querySelectorAll("#navList [data-nav]").forEach(b=>b.setAttribute("aria-expanded","false"))}
+$("#navList").addEventListener("mouseover",e=>{const b=e.target.closest("[data-nav]");if(b&&matchMedia("(hover:hover)").matches)mega(+b.dataset.nav)});
+$("#navList").addEventListener("focusin",e=>{const b=e.target.closest("[data-nav]");if(b)mega(+b.dataset.nav)});
+$("#header").addEventListener("mouseleave",closeMega);
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeMega();closeModal();closeDrawers()}});
+
+function apply(a){resetFilters(true);
+  if(a.cats)a.cats.forEach(c=>st.cats.add(c));if(a.mats)a.mats.forEach(m=>st.mats.add(m));
+  if(a.max){st.max=a.max}if(a.min)st.min=a.min;if(a.sale)st.sale=true;if(a.sort)st.sort=a.sort;if(a.wish)st.wishOnly=true;
+  st.title=a.title||(a.cats&&a.cats.length===1?a.cats[0]:"All bags");syncUI();render();closeMega();closeDrawers();
+  $("#shop").scrollIntoView({behavior:calm()?"auto":"smooth"})}
+document.addEventListener("click",e=>{
+  const n=e.target.closest("[data-nav]");if(n){apply(NAV[+n.dataset.nav].a);return}
+  const g=e.target.closest("[data-go]");if(g){apply(JSON.parse(g.dataset.go));return}
+  if(e.target.closest("[data-t]"))toast("This is a demo page. Links in the footer don't open anything yet.");
+});
+
+// ---------- hero ----------
+const SL=[
+ {w:"WEEKEND",eb:"Festive 2026",h:"Built for the long weekend",p:"The Marigold Weekender in waxed canvas. 40 litres, carry-on ready, and tough enough for every trip.",pid:11,col:"Mustard",a:{cats:["Duffels"],title:"Travel"},cta:"Shop travel"},
+ {w:"OFFICE",eb:"New season",h:"The new office carry",p:"Full-grain leather briefs and sleeves that hold a 15.6\" laptop and still look sharp at 9 pm.",pid:9,col:"Tan",a:{cats:["Laptop Bags"],title:"Work bags"},cta:"Shop work"},
+ {w:"HERITAGE",eb:"Handmade in Kanpur",h:"The Heritage Rucksack",p:"Hand-stitched leather that gets better with every year you carry it. Free initials included.",pid:4,col:"Tan",a:{cats:["Backpacks"]},cta:"Shop backpacks"},
+ {w:"GIFTING",eb:"The gift edit",h:"Gifts under ₹1,999",p:"Wallets, card holders and clutches, wrapped free with a handwritten note.",pid:15,col:"Tan",a:{max:1999,title:"Gifts under ₹1,999"},cta:"Shop gifts"}
+];
+function fixRefs(){
+  for(let i=SL.length-1;i>=0;i--)if(!P.some(x=>x.id===SL[i].pid))SL.splice(i,1);
+  if(!SL.length&&P.length){const p=[...P].sort((a,b)=>a.new-b.new)[0];SL.push({w:p.cat.split(" ")[0].toUpperCase(),eb:"New arrival",h:p.name,p:p.mat+". "+p.fits+".",pid:p.id,col:p.colors[0],a:{cats:[p.cat]},cta:"Shop "+p.cat})}
+  NAV.forEach(n=>{if(n.f&&P.length&&!P.some(x=>x.id===n.f))n.f=P[0].id});
+  cart=cart.filter(i=>P.some(x=>x.id===i.id));wish=wish.filter(id=>P.some(x=>x.id===id));recent=recent.filter(id=>P.some(x=>x.id===id))}
+fixRefs();
+let hi=0,paused=false,htimer,hcolor;
+function drawSw(p){$("#hsw").hidden=!!(PH[p.id]||PIMG[p.id]);$("#hsw").innerHTML=`Try a colour ${p.colors.map(n=>`<button data-hsw="${n}" aria-label="${n}" aria-pressed="${n===hcolor}" style="background:${COLORS[n]}"></button>`).join("")}`}
+$("#hsw").onclick=e=>{const b=e.target.closest("[data-hsw]");if(!b)return;const p=P.find(x=>x.id===SL[hi].pid);hcolor=b.dataset.hsw;sel[p.id]=hcolor;
+  const im=$("#himg");im.innerHTML=art(p,COLORS[hcolor]);im.classList.remove("in");void im.offsetWidth;im.classList.add("in");drawSw(p);if(!paused)$("#hPause").click()};
+const heroEl=$("#hero");
+// hero reacts to scroll: sets --p (0→1) on the hero with easing; all layer motion lives in the CSS above
+(()=>{let cur=0,tgt=0,raf=0;
+  const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+  const read=()=>{const end=heroEl.offsetTop+heroEl.offsetHeight*.9;tgt=calm()?0:clamp(scrollY/Math.max(1,end),0,1);heroEl.style.setProperty("--k",innerWidth<800?.55:1)};
+  function step(){raf=0;cur+=(tgt-cur)*.14;if(Math.abs(tgt-cur)<.0008)cur=tgt;heroEl.style.setProperty("--p",cur.toFixed(4));if(cur!==tgt)raf=requestAnimationFrame(step)}
+  const go=()=>{read();if(!raf)raf=requestAnimationFrame(step)};
+  addEventListener("scroll",go,{passive:true});addEventListener("resize",go);go()})();
+// animated header: stuck state, scroll-progress line, sliding nav indicator
+(()=>{const h=$("#header"),ul=$("#navList"),ind=document.createElement("i");ind.className="nav-ind";ul.appendChild(ind);
+  ul.querySelectorAll("li").forEach((li,i)=>li.style.setProperty("--i",i));
+  let st=false,tk=0;
+  const upd=()=>{tk=0;const y=scrollY;if(!st&&y>60){st=true;h.classList.add("stuck")}else if(st&&y<20){st=false;h.classList.remove("stuck")}
+    const mx=document.documentElement.scrollHeight-innerHeight;h.style.setProperty("--sp",mx>0?Math.min(1,y/mx).toFixed(4):0)};
+  addEventListener("scroll",()=>{if(!tk)tk=requestAnimationFrame(upd)},{passive:true});upd();
+  const to=b=>{const u=ul.getBoundingClientRect(),r=b.getBoundingClientRect();ind.style.width=r.width+"px";ind.style.transform=`translate(${r.left-u.left}px,${r.bottom-u.top-2}px)`;ind.style.opacity=1};
+  const rest=()=>{const o=ul.querySelector('[aria-expanded="true"]');if(o)to(o);else ind.style.opacity=0};
+  ul.addEventListener("mouseover",e=>{const b=e.target.closest("button");if(b)to(b)});
+  ul.addEventListener("focusin",e=>{const b=e.target.closest("button");if(b)to(b)});
+  ul.addEventListener("mouseleave",()=>setTimeout(rest,60));ul.addEventListener("focusout",()=>setTimeout(rest,60));
+  new MutationObserver(rest).observe(ul,{attributes:true,subtree:true,attributeFilter:["aria-expanded"]});
+  addEventListener("resize",rest)})();
+// zipper offer: realistic canvas zipper
+(()=>{const tr=$("#ztrack"),pull=$("#zpull"),cv=$("#zcv"),cx=cv.getContext("2d");
+  let W=0,H=0,pos=0,drag=false,moved=false,done=false,grab=0,lastS=0,ang=0,angV=0,raf=0,anim=null,idle=0;
+  const PITCH=8,RAMP=170,GAP=27,EDGE=7;
+  // woven tape texture
+  const wv=document.createElement("canvas");wv.width=wv.height=6;const w=wv.getContext("2d");
+  w.fillStyle="#141414";w.fillRect(0,0,6,6);w.fillStyle="#1f1f1f";w.fillRect(0,0,3,1);w.fillRect(3,3,3,1);w.fillStyle="#0b0b0b";w.fillRect(0,2,6,1);w.fillRect(1,5,4,1);
+  let weave=null;
+  const S=()=>{const min=62,max=W-26;return min+(max-min)*pos/100};
+  const sm=t=>t*t*(3-2*t);
+  const d=(x,s)=>x>=s?0:GAP*sm(Math.min(1,(s-x)/RAMP));
+  function size(){const r=tr.getBoundingClientRect();if(!r.width)return;const dpr=Math.min(2,devicePixelRatio||1);W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0);weave=cx.createPattern(wv,"repeat");draw()}
+  function metal(x0,y0,x1,y1){const g=cx.createLinearGradient(x0,y0,x1,y1);g.addColorStop(0,"#5c4520");g.addColorStop(.28,"#C79F55");g.addColorStop(.5,"#F7E7B8");g.addColorStop(.72,"#B48A43");g.addColorStop(1,"#4e3a19");return g}
+  function tooth(x,y,a,flip){cx.save();cx.translate(x,y);cx.rotate(a);if(flip)cx.scale(1,-1);
+    // base sits under the tape (y<0), head reaches past the centre line
+    cx.beginPath();cx.moveTo(-2.6,-6);cx.lineTo(2.6,-6);cx.lineTo(2.6,3);cx.quadraticCurveTo(3.4,6.6,0,7.4);cx.quadraticCurveTo(-3.4,6.6,-2.6,3);cx.closePath();
+    cx.fillStyle=metal(-3,0,3,0);cx.fill();
+    cx.fillStyle="rgba(255,255,255,.55)";cx.fillRect(-.6,-4,1.1,7);
+    cx.fillStyle="rgba(0,0,0,.35)";cx.fillRect(-2.6,-1.2,5.2,1);
+    cx.restore()}
+  function tape(s,top){const y0=H/2,sg=top?-1:1;cx.save();cx.beginPath();
+    if(top){cx.moveTo(-2,-2);cx.lineTo(W+2,-2)}else{cx.moveTo(-2,H+2);cx.lineTo(W+2,H+2)}
+    for(let x=W+2;x>=-2;x-=3)cx.lineTo(x,y0+sg*(EDGE+d(x,s)));
+    cx.closePath();cx.shadowColor="rgba(0,0,0,.9)";cx.shadowBlur=12;cx.shadowOffsetY=top?4:-4;cx.fillStyle="#151515";cx.fill();cx.shadowColor="transparent";cx.fillStyle=weave;cx.fill();
+    // edge sheen + stitching
+    cx.beginPath();for(let x=-2;x<=W+2;x+=3){const y=y0+sg*(EDGE+d(x,s))+sg*1.5;x<0?cx.moveTo(x,y):cx.lineTo(x,y)}cx.strokeStyle="rgba(255,255,255,.07)";cx.lineWidth=2;cx.stroke();
+    cx.beginPath();for(let x=-2;x<=W+2;x+=3){const y=y0+sg*(EDGE+12+d(x,s));x<0?cx.moveTo(x,y):cx.lineTo(x,y)}cx.setLineDash([5,4]);cx.strokeStyle="rgba(205,174,110,.35)";cx.lineWidth=1;cx.stroke();cx.setLineDash([]);
+    cx.restore()}
+  function draw(){if(!W)return;const s=S(),y0=H/2;cx.clearRect(0,0,W,H);
+    // revealed lining + coupon (only behind the open part)
+    cx.save();cx.beginPath();cx.rect(0,0,s,H);cx.clip();
+    const lg=cx.createLinearGradient(0,y0-GAP,0,y0+GAP);lg.addColorStop(0,"#000");lg.addColorStop(.5,"#1c1710");lg.addColorStop(1,"#000");cx.fillStyle=lg;cx.fillRect(0,0,s,H);
+    cx.font="700 15px 'Josefin Sans','Century Gothic',sans-serif";try{cx.letterSpacing="3px"}catch(e){}cx.textBaseline="middle";
+    const msg="✦  CODE ZIP10 UNLOCKED  ·  EXTRA 10% OFF YOUR BAG  ";const mw=cx.measureText(msg).width;
+    const tg=cx.createLinearGradient(0,y0-8,0,y0+8);tg.addColorStop(0,"#F7E7B8");tg.addColorStop(1,"#B48A43");cx.fillStyle=tg;
+    for(let x=18;x<s;x+=mw)cx.fillText(msg,x,y0+1);
+    try{cx.letterSpacing="0px"}catch(e){}cx.restore();
+    tape(s,true);tape(s,false);
+    // teeth: top row and bottom row interleave by half a pitch
+    for(let x=4;x<W+PITCH;x+=PITCH){const dd=d(x,s),sl=(d(x+1,s)-d(x-1,s))/2;tooth(x,y0-EDGE-dd+6,-Math.atan(sl)*.9,false)}
+    for(let x=4+PITCH/2;x<W+PITCH;x+=PITCH){const dd=d(x,s),sl=(d(x+1,s)-d(x-1,s))/2;tooth(x,y0+EDGE+dd-6,Math.atan(sl)*.9,true)}
+    // slider body
+    cx.save();cx.translate(s,y0);cx.shadowColor="rgba(0,0,0,.75)";cx.shadowBlur=14;cx.shadowOffsetY=6;
+    cx.beginPath();cx.moveTo(-30,0);cx.quadraticCurveTo(-26,-15,-12,-18);cx.lineTo(14,-18);cx.quadraticCurveTo(20,-18,20,-12);cx.lineTo(20,12);cx.quadraticCurveTo(20,18,14,18);cx.lineTo(-12,18);cx.quadraticCurveTo(-26,15,-30,0);cx.closePath();
+    cx.fillStyle=metal(0,-18,0,18);cx.fill();cx.shadowColor="transparent";cx.strokeStyle="rgba(60,42,15,.9)";cx.lineWidth=1;cx.stroke();
+    cx.fillStyle="rgba(255,255,255,.35)";cx.beginPath();cx.ellipse(2,-9,14,3,0,0,7);cx.fill();
+    cx.strokeStyle="rgba(0,0,0,.25)";cx.beginPath();cx.moveTo(-22,-6);cx.lineTo(16,-6);cx.moveTo(-22,6);cx.lineTo(16,6);cx.stroke();
+    // hinge
+    cx.fillStyle=metal(-8,-6,-8,6);cx.beginPath();cx.arc(-6,0,6,0,7);cx.fill();cx.strokeStyle="rgba(60,42,15,.9)";cx.stroke();
+    // pull tab (swings with motion)
+    cx.rotate(ang);cx.shadowColor="rgba(0,0,0,.7)";cx.shadowBlur=10;cx.shadowOffsetY=7;
+    cx.beginPath();cx.moveTo(-4,-7);cx.lineTo(-44,-10);cx.quadraticCurveTo(-54,-10,-54,0);cx.quadraticCurveTo(-54,10,-44,10);cx.lineTo(-4,7);cx.quadraticCurveTo(0,0,-4,-7);cx.closePath();
+    cx.fillStyle=metal(0,-10,0,10);cx.fill();cx.shadowColor="transparent";cx.strokeStyle="rgba(60,42,15,.9)";cx.stroke();
+    cx.fillStyle="#0A0A0A";cx.beginPath();cx.roundRect?cx.roundRect(-46,-3.5,22,7,3.5):cx.rect(-46,-3.5,22,7);cx.fill();
+    cx.fillStyle="rgba(255,255,255,.45)";cx.fillRect(-40,-8,26,1.4);
+    cx.restore();
+    pull.style.left=s+"px";
+  }
+  function loop(t){raf=0;let busy=false;
+    if(anim){const k=Math.min(1,(t-anim.t0)/anim.dur);pos=anim.from+(anim.to-anim.from)*(1-Math.pow(1-k,3));if(k>=1){anim=null;if(pos>=100)finish()}busy=true}
+    const s=S(),v=s-lastS;lastS=s;
+    angV+=(-ang*.09-angV*.18)+v*.0035;ang+=angV;if(Math.abs(ang)>.6)ang=Math.sign(ang)*.6;
+    if(Math.abs(angV)>.0005||Math.abs(ang)>.0005||Math.abs(v)>.01)busy=true;
+    draw();if(busy||drag)kick()}
+  const kick=()=>{if(!raf)raf=requestAnimationFrame(loop)};
+  const set=v=>{pos=Math.max(0,Math.min(100,v));kick()};
+  function finish(){if(done)return;done=true;tr.classList.add("done");$("#zCopy").hidden=false;$("#zipLbl").textContent="Offer unlocked";toast("Unzipped! Use ZIP10 for an extra 10% off")}
+  function auto(){if(done)return;anim={from:pos,to:100,t0:performance.now(),dur:calm()?1:1100+(100-pos)*8};kick()}
+  const px2pos=x=>{const min=62,max=W-26;return (x-min)/(max-min)*100};
+  const lx=e=>e.clientX-tr.getBoundingClientRect().left;
+  const start=e=>{if(done)return;const x=lx(e),s=S();if(x<s-64||x>s+26)return false;drag=true;moved=false;grab=x-s;anim=null;tr.setPointerCapture?.(e.pointerId);e.preventDefault();return true};
+  tr.addEventListener("pointerdown",start);
+  tr.addEventListener("pointermove",e=>{if(!drag)return;moved=true;set(px2pos(lx(e)-grab));if(pos>=100){drag=false;finish()}});
+  const end=()=>{if(!drag)return;drag=false;if(!moved||pos>82)auto()};
+  tr.addEventListener("pointerup",end);tr.addEventListener("pointercancel",end);
+  pull.addEventListener("keydown",e=>{if(e.key==="ArrowRight"){set(pos+8);if(pos>=100)finish()}if(e.key==="ArrowLeft")set(pos-8);if(e.key==="Enter"||e.key===" "){e.preventDefault();auto()}});
+  pull.addEventListener("click",e=>{if(e.detail===0)auto()});
+  // idle hint: the pull tab jiggles until someone tries it
+  idle=setInterval(()=>{if(done||drag||pos>0||calm())return;angV+=.06;kick()},3200);
+  new ResizeObserver(size).observe(tr);size();
+  $("#zCopy").onclick=async()=>{try{await navigator.clipboard.writeText("ZIP10");toast("Copied ZIP10. Apply it in your bag.")}catch(err){toast("Your code is ZIP10. Enter it in your bag.")}};
+})();
+$("#hbar").innerHTML=SL.map((_,i)=>`<button data-hs="${i}" aria-label="Slide ${i+1}"><i></i></button>`).join("");
+function slide(i){hi=(i+SL.length)%SL.length;const s=SL[hi],p=P.find(x=>x.id===s.pid);
+  hcolor=s.col;$("#hword").innerHTML=Array(6).fill(`<span>${s.w}</span>`).join("");
+  $("#hprice").innerHTML=`<b>${p.name}</b>${INR(p.price)}${p.mrp>p.price?`<s>${INR(p.mrp)}</s>`:""}`;
+  drawSw(p);
+  $("#htxt").innerHTML=`<span class="eb">${s.eb}</span><h1>${s.h.split(" ").map((w,j)=>`<span class="w" style="animation-delay:${j*80}ms">${w}</span>`).join(" ")}</h1><p>${s.p}</p><div class="hcta"><button class="btn inv" id="hGo">${s.cta}</button><button class="tlink" data-open="${p.id}">View ${p.name}</button></div>`;
+  $("#himg").innerHTML=art(p,COLORS[hcolor]);
+  ["#htxt","#himg"].forEach(q=>{const el=$(q);el.classList.remove("in");void el.offsetWidth;el.classList.add("in")});
+  $("#hGo").onclick=()=>apply(s.a);
+  $("#hnum").textContent=`0${hi+1} / 0${SL.length}`;
+  document.querySelectorAll("#hbar button").forEach((b,j)=>{b.className=j<hi?"done":j===hi?"on":"";b.firstChild.style.animation="none";void b.offsetWidth;b.firstChild.style.animation=""});
+  clearTimeout(htimer);if(!paused&&!calm())htimer=setTimeout(()=>slide(hi+1),5000)}
+$("#hPrev").onclick=()=>slide(hi-1);$("#hNext").onclick=()=>slide(hi+1);
+$("#hbar").onclick=e=>{const b=e.target.closest("[data-hs]");if(b)slide(+b.dataset.hs)};
+$("#hPause").onclick=()=>{paused=!paused;$("#hero").classList.toggle("paused",paused);$("#hPause").textContent=paused?"▶":"❚❚";$("#hPause").setAttribute("aria-label",paused?"Play slideshow":"Pause slideshow");if(paused)clearTimeout(htimer);else slide(hi)};
+
+// ---------- tiles / editorial ----------
+const TILES=[["Backpacks","Black"],["Totes","Tan"],["Laptop Bags","Navy"],["Duffels","Olive"],["Sling Bags","Oxblood"],["Wallets","Sand"]];
+$("#tiles").innerHTML=TILES.map(([c,col])=>`<button class="tile" data-go='${JSON.stringify({cats:[c]})}'>${tileArt(c,col)}<span>${c}</span></button>`).join("");
+$("#edArt1").innerHTML=art(P[0],COLORS.Tan,"AK");
+$("#edArt2").innerHTML=art(P[14],COLORS.Black);
+$("#edMono").onclick=()=>openProduct(1,"AK");
+$("#edGift").onclick=()=>apply({max:1999,title:"Gifts under ₹1,999"});
+$("#annBtn").onclick=()=>apply({sale:true,sort:"hi",title:"Sale"});
+$("#logo").onclick=()=>{resetFilters();scrollTo({top:0,behavior:calm()?"auto":"smooth"})};
+
+// ---------- filters ----------
+$("#catChecks").innerHTML=CATS.map((c,i)=>`<label class="chk"><input type="checkbox" id="cat${i}" data-cat="${c}"> ${c}</label>`).join("");
+$("#swatches").innerHTML=Object.entries(COLORS).map(([n,h])=>`<button class="sw" title="${n}" aria-label="${n}" aria-pressed="false" data-col="${n}" style="background:${h}"></button>`).join("");
+$("#materials").innerHTML=MATS.map((m,i)=>`<label class="chk"><input type="checkbox" id="mat${i}" data-mat="${m}"> ${m}</label>`).join("");
+$("#catChecks").onchange=e=>{const c=e.target.dataset.cat;e.target.checked?st.cats.add(c):st.cats.delete(c);st.title=st.cats.size===1?[...st.cats][0]:"All bags";render()};
+$("#swatches").onclick=e=>{const b=e.target.closest("[data-col]");if(!b)return;const c=b.dataset.col;st.colors.has(c)?st.colors.delete(c):st.colors.add(c);syncUI();render()};
+$("#materials").onchange=e=>{const m=e.target.dataset.mat;e.target.checked?st.mats.add(m):st.mats.delete(m);render()};
+$("#price").oninput=e=>{st.max=+e.target.value;st.min=0;syncUI();render()};
+$("#onSale").onchange=e=>{st.sale=e.target.checked;render()};
+$("#inStock").onchange=e=>{st.stock=e.target.checked;render()};
+$("#sort").onchange=e=>{st.sort=e.target.value;render()};
+const onQ=e=>{st.q=e.target.value.trim().toLowerCase();render()};
+$("#q").oninput=onQ;
+$("#q2").oninput=e=>{onQ(e)};$("#q2").onkeydown=e=>{if(e.key==="Enter"){closeDrawers();$("#shop").scrollIntoView()}};
+$("#mfilter").onclick=()=>$("#filters").classList.toggle("show");
+$("#reset").onclick=()=>resetFilters();
+function resetFilters(silent){Object.assign(st,{q:"",min:0,max:PMAX,sale:false,stock:false,wishOnly:false,sort:"pop",title:"All bags"});st.cats.clear();st.colors.clear();st.mats.clear();$("#q").value="";$("#q2").value="";syncUI();if(!silent)render()}
+function syncUI(){
+  $("#price").value=st.max;$("#priceVal").textContent=(st.min?INR(st.min)+" – ":"Up to ")+INR(st.max);
+  $("#onSale").checked=st.sale;$("#inStock").checked=st.stock;$("#sort").value=st.sort;
+  document.querySelectorAll("#catChecks input").forEach(i=>i.checked=st.cats.has(i.dataset.cat));
+  document.querySelectorAll("#materials input").forEach(i=>i.checked=st.mats.has(i.dataset.mat));
+  document.querySelectorAll(".sw[data-col]").forEach(s=>s.setAttribute("aria-pressed",st.colors.has(s.dataset.col)))}
+$("#active").onclick=e=>{const b=e.target.closest("[data-rmf]");if(!b)return;const[k,v]=b.dataset.rmf.split("|");
+  if(k==="cat")st.cats.delete(v);if(k==="col")st.colors.delete(v);if(k==="mat")st.mats.delete(v);if(k==="price"){st.max=PMAX;st.min=0}if(k==="sale")st.sale=false;if(k==="stock")st.stock=false;if(k==="wish")st.wishOnly=false;if(k==="q"){st.q="";$("#q").value=""}
+  if(!st.cats.size&&!st.wishOnly)st.title="All bags";syncUI();render()};
+
+// ---------- grid ----------
+function render(){
+  let list=P.filter(p=>(!st.cats.size||st.cats.has(p.cat))&&p.price<=st.max&&p.price>=st.min&&(!st.q||(p.name+" "+p.cat+" "+p.mat+" "+p.colors.join(" ")).toLowerCase().includes(st.q))
+    &&(!st.colors.size||p.colors.some(c=>st.colors.has(c)))&&(!st.mats.size||st.mats.has(p.mat))&&(!st.sale||p.mrp>p.price)&&(!st.stock||p.stock>0)&&(!st.wishOnly||wish.includes(p.id)));
+  list.sort({pop:(a,b)=>b.pop-a.pop,new:(a,b)=>a.new-b.new,lo:(a,b)=>a.price-b.price,hi:(a,b)=>b.price-a.price,rate:(a,b)=>b.rate-a.rate}[st.sort]);
+  $("#shopTitle").textContent=st.wishOnly?"Your wishlist":st.title;
+  $("#count").textContent=list.length+(list.length===1?" product":" products");
+  const pills=[...[...st.cats].map(c=>["cat|"+c,c]),...[...st.colors].map(c=>["col|"+c,c]),...[...st.mats].map(m=>["mat|"+m,m])];
+  if(st.max<PMAX||st.min)pills.push(["price|",(st.min?INR(st.min)+"–":"≤ ")+INR(st.max)]);if(st.sale)pills.push(["sale|","On sale"]);if(st.stock)pills.push(["stock|","In stock"]);if(st.wishOnly)pills.push(["wish|","Wishlist"]);if(st.q)pills.push(["q|",`"${st.q}"`]);
+  $("#active").innerHTML=pills.map(([k,l])=>`<button class="pill" data-rmf="${k}" aria-label="Remove filter ${l}">${l}</button>`).join("");
+  $("#grid").innerHTML=list.length?list.map(card).join(""):`<div class="empty"><b>No bags match these filters.</b><br>Remove a filter or <button class="tlink" onclick="resetFilters()">clear all</button>.</div>`;
+  $("#wishCount").textContent=wish.length}
+function card(p,i){
+  const cur=sel[p.id]||p.colors[0];const rib=p.stock===0?"Sold out":p.stock<6?`Only ${p.stock} left`:p.new<=2?"New":p.mrp>p.price?disc(p)+"% off":"";
+  return `<article class="card reveal" style="animation-delay:${Math.min(i,8)*45}ms">
+   <div class="pic"><button class="thumb" id="th${p.id}" data-open="${p.id}" aria-label="View ${p.name}">${art(p,COLORS[cur])}</button>
+    ${rib?`<span class="ribbon">${rib}</span>`:""}
+    <button class="heart" data-wish="${p.id}" aria-pressed="${wish.includes(p.id)}" aria-label="Save ${p.name} to wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+    <button class="btn quick" data-add="${p.id}" ${p.stock===0?"disabled":""}>${p.stock===0?"Sold out":"Quick add"}</button></div>
+   <div class="dots">${p.colors.map(n=>`<button title="${n}" aria-label="${n}" data-cc="${n}" data-pid="${p.id}" aria-pressed="${n===cur}" style="background:${COLORS[n]}"></button>`).join("")}</div>
+   <div class="meta"><span class="name">${p.name}</span><span class="sub">${p.mat}${p.rev?` · ★ ${p.rate} (${p.rev})`:""}</span></div>
+   <div class="price"><span>${INR(p.price)}</span>${p.mrp>p.price?`<s>${INR(p.mrp)}</s><span class="off">${disc(p)}% off</span>`:""}</div>
+  </article>`}
+document.addEventListener("click",e=>{
+  const o=e.target.closest("[data-open]"),w=e.target.closest("[data-wish]"),a=e.target.closest("[data-add]"),cc=e.target.closest("[data-cc]");
+  if(o){closeMega();openProduct(+o.dataset.open)}
+  if(w){const id=+w.dataset.wish;wish=wish.includes(id)?wish.filter(x=>x!==id):[...wish,id];store.set("zz_wish",wish);
+    document.querySelectorAll(`[data-wish="${id}"]`).forEach(b=>b.setAttribute("aria-pressed",wish.includes(id)));
+    $("#wishCount").textContent=wish.length;toast(wish.includes(id)?"Saved to your wishlist":"Removed from your wishlist");if(st.wishOnly)render()}
+  if(cc){const id=+cc.dataset.pid,p=P.find(x=>x.id===id);sel[id]=cc.dataset.cc;$("#th"+id).innerHTML=art(p,COLORS[sel[id]]);cc.parentElement.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b===cc))}
+  if(a&&!a.disabled){const p=P.find(x=>x.id==a.dataset.add);const col=sel[p.id]||p.colors[0];fly($("#th"+p.id),p,col);addToCart(p,col,1,"")}
+});
+const showWish=()=>{apply({wish:true,title:"Your wishlist"});if(!wish.length)toast("Your wishlist is empty. Tap ♡ on any bag to save it.")};
+$("#wishBtn").onclick=showWish;$("#fWish").onclick=showWish;
+
+// ---------- product modal ----------
+function openProduct(id,preIni){
+  const p=P.find(x=>x.id===id);let col=sel[id]||p.colors[0],q=1,ini=preIni||"";
+  recent=[id,...recent.filter(x=>x!==id)].slice(0,8);store.set("zz_recent",recent);drawRecent();
+  const draw=()=>{$("#mbox").innerHTML=`
+   <button class="x" id="mClose" aria-label="Close">×</button>
+   <div class="mart" id="mart">${art(p,COLORS[col],ini)}</div>
+   <div class="mdet">
+    <div class="eyebrow">${p.cat} · Style ZZ-${String(p.id).padStart(3,"0")}-${col.slice(0,3).toUpperCase()}</div>
+    <h2>${p.name}</h2>
+    ${p.rev?`<div class="stars">${"★".repeat(Math.round(p.rate))}${"☆".repeat(5-Math.round(p.rate))} <span>${p.rate} · ${p.rev} reviews</span></div>`:""}
+    <div class="price" style="font-size:20px"><span>${INR(p.price)}</span>${p.mrp>p.price?`<s>MRP ${INR(p.mrp)}</s><span class="off">${disc(p)}% off</span>`:""}</div>
+    <small class="hint" style="margin-top:-10px">Inclusive of all taxes</small>
+    <div><div class="eyebrow" style="margin-bottom:8px;color:var(--ink)">Colour: ${col}</div><div class="swatches">${p.colors.map(n=>`<button class="sw" data-mc="${n}" aria-label="${n}" aria-pressed="${n===col}" style="background:${COLORS[n]}"></button>`).join("")}</div></div>
+    ${leather(p)?`<div><div class="eyebrow" style="margin-bottom:8px;color:var(--ink)">Free monogram</div><div class="row2"><input id="iniIn" maxlength="3" placeholder="Up to 3 letters" value="${ini}" aria-label="Initials"></div><small class="hint">See your initials on the bag as you type.</small></div>`:""}
+    <dl class="specs"><dt>Material</dt><dd>${p.mat}</dd><dt>Size</dt><dd>${p.dim}</dd><dt>Holds</dt><dd>${p.fits}</dd><dt>Availability</dt><dd style="color:${p.stock?"var(--good)":"#B3261E"}">${p.stock?(p.stock<6?`Only ${p.stock} left`:"In stock"):"Sold out"}</dd></dl>
+    <div class="row2"><input id="pinIn" inputmode="numeric" maxlength="6" placeholder="Pincode" aria-label="Pincode"><button id="pinBtn">Check delivery</button></div>
+    <small class="hint" id="pinOut">Enter your pincode to see the delivery date.</small>
+    <div style="display:flex;gap:10px;align-items:center">
+      <div class="qty" style="margin:0"><button id="mMinus" aria-label="Decrease">−</button><span>${q}</span><button id="mPlus" aria-label="Increase">+</button></div>
+      <button class="btn" id="mAdd" style="flex:1" ${p.stock?"":"disabled"}>${p.stock?"Add to bag · "+INR(p.price*q):"Sold out"}</button>
+    </div>
+   </div>`;
+   $("#mClose").onclick=closeModal;
+   document.querySelectorAll("[data-mc]").forEach(b=>b.onclick=()=>{col=b.dataset.mc;sel[id]=col;draw()});
+   $("#mMinus").onclick=()=>{q=Math.max(1,q-1);draw()};
+   $("#mPlus").onclick=()=>{q=Math.min(p.stock||1,q+1);draw()};
+   const ii=$("#iniIn");if(ii){ii.oninput=()=>{ini=ii.value.toUpperCase().replace(/[^A-Z.&]/g,"").slice(0,3);ii.value=ini;$("#mart").innerHTML=art(p,COLORS[col],ini)};}
+   $("#mAdd").onclick=()=>{fly($("#mart"),p,col);addToCart(p,col,q,ini);closeModal()};
+   $("#pinBtn").onclick=()=>{const v=$("#pinIn").value.trim(),out=$("#pinOut");
+     if(!/^[1-9]\d{5}$/.test(v)){out.textContent="Enter a valid 6-digit pincode.";out.style.color="#B3261E";return}
+     const days=["1","2","4","5","6"].includes(v[0])?3:5,dt=new Date();dt.setDate(dt.getDate()+days);
+     out.style.color="var(--good)";out.textContent=`Delivery by ${dt.toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"})} · Cash on delivery available`};
+  };
+  draw();$("#modal").hidden=false}
+function closeModal(){$("#modal").hidden=true}
+$("#mOverlay").onclick=closeModal;
+
+// ---------- cart ----------
+function addToCart(p,col,q,ini){const k=p.id+"-"+col+"-"+(ini||"");const ex=cart.find(i=>i.k===k);
+  if(ex)ex.q=Math.min(ex.q+q,p.stock);else cart.push({k,id:p.id,col,q,ini:ini||""});saveCart();toast(`Added ${p.name} (${col}${ini?", "+ini:""}) to your bag`)}
+function saveCart(bump=true){store.set("zz_cart2",cart);const bb=$("#cartCount");bb.textContent=cart.reduce((s,i)=>s+i.q,0);if(bump){bb.classList.remove("bump");void bb.offsetWidth;bb.classList.add("bump");const cb=$("#cartBtn");cb.classList.remove("wig");void cb.offsetWidth;cb.classList.add("wig")}if($("#drawer").classList.contains("open"))drawCart()}
+const COUPONS={ZIP10:{t:"pct",v:10,min:0,label:"10% off"},FLAT500:{t:"flat",v:500,min:2999,label:"₹500 off over ₹2,999"},FESTIVE15:{t:"pct",v:15,min:4999,label:"15% off over ₹4,999"}};
+function totals(){const sub=cart.reduce((s,i)=>s+P.find(p=>p.id===i.id).price*i.q,0),mrp=cart.reduce((s,i)=>s+P.find(p=>p.id===i.id).mrp*i.q,0);
+  let cd=0;if(coupon){const c=COUPONS[coupon];if(sub>=c.min)cd=c.t==="pct"?sub*c.v/100:c.v;else coupon=null}
+  const ship=sub===0||sub>=1999?0:99,gw=gift&&sub?GIFT_FEE:0,total=sub-cd+ship+gw;return{sub,mrp,cd,ship,gw,total,gst:total-total/1.12}}
+function drawCart(){
+  $("#dTitle").textContent="Your bag";setStep(cart.length?1:0);
+  if(!cart.length){$("#dbody").innerHTML=`<div class="empty" style="padding:40px 10px"><div style="width:130px;margin:0 auto">${bag("tote",COLORS.Black)}</div><b>Your bag is empty.</b><br>Add something you'll carry every day.</div>`;$("#dfoot").innerHTML=`<button class="btn" id="keep">Continue shopping</button>`;$("#keep").onclick=closeDrawers;return}
+  $("#dbody").innerHTML=cart.map(i=>{const p=P.find(x=>x.id===i.id);return `<div class="line">
+    <div class="mini">${art(p,COLORS[i.col],i.ini)}</div>
+    <div class="info"><b>${p.name}</b><small>${i.col}${i.ini?" · Initials "+i.ini:""} · ${INR(p.price)}</small><br>
+     <div class="qty"><button data-dec="${i.k}" aria-label="Decrease">−</button><span>${i.q}</span><button data-inc="${i.k}" aria-label="Increase">+</button></div></div>
+    <div style="text-align:right"><b style="font-variant-numeric:tabular-nums">${INR(p.price*i.q)}</b><br><button class="rm" data-rm="${i.k}">Remove</button></div></div>`}).join("");
+  const t=totals(),left=Math.max(0,1999-t.sub);
+  $("#dfoot").innerHTML=`
+   <div class="hint">${left?`Add ${INR(left)} more for free shipping`:"You've unlocked free shipping"}</div>
+   <div class="ship-bar"><i style="width:${Math.min(100,t.sub/1999*100)}%"></i></div>
+   <div class="gift ${gift?"on":""}">
+     <label><input type="checkbox" id="giftChk" ${gift?"checked":""}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="9" width="18" height="12"/><path d="M2 9h20v-3H2zM12 6v15M12 6C10 2 6 3 7.5 6M12 6c2-4 6-3 4.5 0"/></svg><span><b>Gift packing</b><br><small class="hint">Black box, ribbon and a handwritten card</small></span><span class="fee">+${INR(GIFT_FEE)}</span></label>
+     ${gift?`<textarea id="giftMsg" maxlength="150" placeholder="Your message for the card (optional, 150 characters)" aria-label="Gift message">${esc(giftMsg)}</textarea><small class="hint" id="giftLeft">${150-giftMsg.length} characters left · Prices are hidden on the invoice in the box</small>`:""}
+   </div>
+   <div class="coupon"><input id="cIn" placeholder="Promo code" value="${coupon||""}" aria-label="Promo code"><button id="cBtn">${coupon?"Remove":"Apply"}</button></div>
+   <div class="hint">Try ZIP10, FLAT500 or FESTIVE15</div>
+   <div class="sum"><span>Total MRP</span><span>${INR(t.mrp)}</span></div>
+   ${t.mrp>t.sub?`<div class="sum"><span>Discount on MRP</span><span class="g">−${INR(t.mrp-t.sub)}</span></div>`:""}
+   ${t.cd?`<div class="sum"><span>Promo ${coupon}</span><span class="g">−${INR(t.cd)}</span></div>`:""}
+   <div class="sum"><span>Shipping</span><span>${t.ship?INR(t.ship):"Free"}</span></div>
+   ${t.gw?`<div class="sum"><span>Gift packing</span><span>${INR(t.gw)}</span></div>`:""}
+   <div class="sum total"><span>Total</span><span>${INR(t.total)}</span></div>
+   <div class="hint">Includes GST of ${INR(t.gst)} (12%)</div>
+   <button class="btn" id="checkout">Checkout</button>`;
+  $("#cBtn").onclick=()=>{if(coupon){coupon=null;drawCart();return}const v=$("#cIn").value.trim().toUpperCase(),c=COUPONS[v];
+    if(!c)return toast("That code isn't valid. Try ZIP10.");if(t.sub<c.min)return toast(`${v} needs a bag total of ${INR(c.min)} or more`);coupon=v;drawCart();toast(`${v} applied: ${c.label}`)};
+  $("#giftChk").onchange=e=>{gift=e.target.checked;drawCart();toast(gift?`Gift packing added (+${INR(GIFT_FEE)})`:"Gift packing removed");if(gift)setTimeout(()=>{const m=$("#giftMsg");if(m)m.focus()},50)};
+  const gm=$("#giftMsg");if(gm)gm.oninput=()=>{giftMsg=gm.value;$("#giftLeft").textContent=`${150-giftMsg.length} characters left · Prices are hidden on the invoice in the box`};
+  $("#checkout").onclick=()=>zipGo($("#checkout"),"Zipping up your bag",drawCheckout)}
+$("#dbody").onclick=e=>{const b=e.target,k=b.dataset.inc||b.dataset.dec||b.dataset.rm;if(!k)return;const i=cart.find(x=>x.k===k),p=P.find(x=>x.id===i.id);
+  if(b.dataset.inc)i.q=Math.min(i.q+1,p.stock);if(b.dataset.dec)i.q--;if(b.dataset.rm||i.q<1)cart=cart.filter(x=>x.k!==k);saveCart(false)};
+function setStep(n){const el=$("#steps");el.hidden=!n;if(!n)return;el.querySelectorAll(".st").forEach(x=>{const k=+x.dataset.s;x.classList.toggle("on",k<=n);x.classList.toggle("cur",k===n)});$("#sfill").style.width=((n-1)/2*100)+"%"}
+function zipGo(btn,label,cb){if(calm())return cb();btn.classList.add("zipping");btn.innerHTML=`<span>${label}…</span>`;setTimeout(cb,780)}
+function stagger(root){[...root.children].forEach((c,i)=>{c.classList.add("rise-in");c.style.animationDelay=(i*55)+"ms"})}
+function confetti(){if(calm())return;const d=$("#drawer"),c=document.createElement("canvas");c.className="confetti";d.appendChild(c);const r=d.getBoundingClientRect(),dpr=Math.min(2,devicePixelRatio||1);c.width=r.width*dpr;c.height=r.height*dpr;const x=c.getContext("2d");x.scale(dpr,dpr);
+  const cols=["#CDAE6E","#F7E7B8","#0A0A0A","#FFFFFF","#8A6A30","#6B6B6B"],P2=[];for(let i=0;i<150;i++)P2.push({x:r.width/2,y:r.height*.32,vx:(Math.random()-.5)*11,vy:-Math.random()*11-3,w:Math.random()*7+4,h:Math.random()*4+3,a:Math.random()*6,va:(Math.random()-.5)*.4,c:cols[i%cols.length]});
+  const t0=performance.now();(function f(t){x.clearRect(0,0,r.width,r.height);const k=(t-t0)/2200;P2.forEach(p=>{p.vy+=.32;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.a+=p.va;x.save();x.globalAlpha=Math.max(0,1-k);x.translate(p.x,p.y);x.rotate(p.a);x.fillStyle=p.c;x.strokeStyle="rgba(0,0,0,.15)";x.fillRect(-p.w/2,-p.h/2,p.w,p.h);x.restore()});if(k<1)requestAnimationFrame(f);else c.remove()})(t0)}
+function drawCheckout(){
+  const t=totals();$("#dTitle").textContent="Checkout";setStep(2);
+  $("#dbody").innerHTML=`<form class="form" id="coForm" novalidate>
+    <label class="full">Full name<input id="fName" autocomplete="name"></label>
+    <label>Mobile<input id="fPhone" inputmode="numeric" maxlength="10"></label>
+    <label>Pincode<input id="fPin" inputmode="numeric" maxlength="6"></label>
+    <label class="full">Address<input id="fAddr" placeholder="House no, street, area"></label>
+    <label>City<input id="fCity"></label>
+    <label>State<input id="fState"></label>
+    <div class="full"><div class="eyebrow" style="margin:6px 0 8px;color:var(--ink)">Payment</div><div class="pay">
+      <label><input type="radio" name="pay" id="pUpi" value="UPI" checked> UPI</label>
+      <label><input type="radio" name="pay" id="pCod" value="Cash on delivery"> Cash on delivery</label></div>
+      <small class="hint">Demo only. No payment is collected.</small></div>
+    <div class="err full" id="fErr"></div></form>`;
+  stagger($("#coForm"));
+  $("#coForm").addEventListener("input",e=>{e.target.classList.remove("bad")});
+  $("#dfoot").innerHTML=`${t.gw?`<div class="sum"><span>Includes gift packing</span><span>${INR(t.gw)}</span></div>`:""}<div class="sum total" style="border:0;padding:0"><span>To pay</span><span>${INR(t.total)}</span></div>
+    <div style="display:flex;gap:8px"><button class="btn line" id="back">Back</button><button class="btn" id="place" style="flex:1">Place order · ${INR(t.total)}</button></div>`;
+  stagger($("#dfoot"));
+  $("#back").onclick=drawCart;
+  $("#place").onclick=()=>{const v=id=>$(id).value.trim();let err="",bad=null;
+    if(!v("#fName")){err="Enter your full name.";bad="#fName"}else if(!/^[6-9]\d{9}$/.test(v("#fPhone"))){err="Enter a 10-digit mobile number starting with 6–9.";bad="#fPhone"}
+    else if(!/^[1-9]\d{5}$/.test(v("#fPin"))){err="Enter a valid 6-digit pincode.";bad="#fPin"}else if(!v("#fAddr")){err="Fill in your full address.";bad="#fAddr"}else if(!v("#fCity")){err="Enter your city.";bad="#fCity"}else if(!v("#fState")){err="Enter your state.";bad="#fState"}
+    $("#fErr").textContent=err;
+    if(err){const el=$(bad);el.classList.remove("bad");void el.offsetWidth;el.classList.add("bad");el.focus();const pb=$("#place");pb.classList.remove("nope");void pb.offsetWidth;pb.classList.add("nope");return}
+    const pay=document.querySelector('input[name=pay]:checked').value,oid="ZZB"+Date.now().toString().slice(-8),dt=new Date();dt.setDate(dt.getDate()+4);
+    const first=cart[0],fp=P.find(x=>x.id===first.id),wasGift=gift,count=cart.reduce((a,i)=>a+i.q,0);
+    const gm2=giftMsg.trim(),fn=esc(v("#fName").split(" ")[0]);
+    const success=()=>{setStep(3);$("#dTitle").textContent="Order placed";
+      $("#dbody").innerHTML=`<div class="done"><svg class="okc" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-15"/></svg><h2 class="caps" style="margin:0 0 8px;font-size:18px">Thank you, ${fn}</h2>
+        <p>Sample order <code>${oid}</code> is confirmed.</p><p>${count} item${count>1?"s":""} · ${INR(t.total)} via ${pay}.${wasGift?`<br>Gift packed${gm2?` with your note: <i>"${esc(gm2)}"</i>`:""}`:""}</p><p>Estimated delivery: <b>${dt.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long"})}</b></p>
+        <small class="hint">This is a demo store, so nothing will ship.</small></div>`;
+      stagger($(".done"));
+      $("#dfoot").innerHTML=`<button class="btn" id="keep">Continue shopping</button>`;stagger($("#dfoot"));$("#keep").onclick=closeDrawers;confetti()};
+    cart=[];coupon=null;gift=false;giftMsg="";saveCart(false);
+    if(calm())return success();
+    $("#dTitle").textContent="Packing your order";
+    $("#dbody").innerHTML=`<div class="pack"><div class="pk-stage"><div class="pk-bag">${art(fp,COLORS[first.col])}</div><div class="pk-flap l"></div><div class="pk-flap r"></div><div class="pk-box"><span>ZZ</span>${wasGift?'<i class="rb-v"></i>':""}</div><div class="pk-tape"></div></div><p class="pk-txt" id="pkTxt">Securing payment…</p><div class="pk-bar"><b></b></div></div>`;
+    $("#dfoot").innerHTML=`<button class="btn" disabled style="width:100%">Please wait…</button>`;
+    const msgs=[[750,"Packing your bag…"],[1500,wasGift?"Tying the ribbon…":"Zipping it shut…"]];
+    msgs.forEach(([ms,m])=>setTimeout(()=>{const e=$("#pkTxt");if(e){e.classList.remove("swap");void e.offsetWidth;e.classList.add("swap");e.textContent=m}},ms));
+    setTimeout(success,2300)}}
+function openDrawer(id){closeMega();const d=$(id);$("#overlay").hidden=false;d.classList.add("open");if(id==="#drawer")drawCart()}
+function closeDrawers(){document.querySelectorAll(".drawer").forEach(d=>d.classList.remove("open"));$("#overlay").hidden=true}
+$("#cartBtn").onclick=()=>openDrawer("#drawer");$("#closeCart").onclick=closeDrawers;$("#overlay").onclick=closeDrawers;
+$("#burger").onclick=()=>openDrawer("#menu");$("#closeMenu").onclick=closeDrawers;
+
+// ---------- misc ----------
+function fly(el,p,col){if(!el||calm())return;const r=el.getBoundingClientRect(),t=$("#cartBtn").getBoundingClientRect(),f=document.createElement("div");f.className="flyer";f.innerHTML=art(p,COLORS[col]);
+  const sx=r.left+r.width/2-35,sy=r.top+r.height/2-35;f.style.left=sx+"px";f.style.top=sy+"px";document.body.appendChild(f);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{f.style.transform=`translate(${t.left+t.width/2-35-sx}px,${t.top+t.height/2-35-sy}px) scale(.3)`;f.style.opacity=".2"}));setTimeout(()=>f.remove(),760)}
+function drawRecent(){const s=$("#recent");if(!recent.length){s.hidden=true;return}s.hidden=false;
+  $("#rrow").innerHTML=recent.map(id=>{const p=P.find(x=>x.id===id);return `<button data-open="${id}">${art(p,COLORS[sel[id]||p.colors[0]])}<b>${p.name}</b><br>${INR(p.price)}</button>`}).join("")}
+$("#news").onsubmit=e=>{e.preventDefault();const v=$("#newsMail").value.trim();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){$("#newsErr").textContent="Enter a valid email address.";return}$("#newsErr").textContent="";$("#newsMail").value="";toast("You're on the list (demo, no email sent)")};
+addEventListener("scroll",()=>{$("#totop").hidden=scrollY<700},{passive:true});
+$("#totop").onclick=()=>scrollTo({top:0,behavior:calm()?"auto":"smooth"});
+let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),2400)}
+
+// ---------- store dashboard ----------
+const cleanQ=t=>String(t||"").replace(/[<>"]/g,"").trim(), cleanT=t=>String(t||"").replace(/[<>]/g,"").trim();
+const slug=t=>t.toLowerCase().replace(/[^a-z0-9]+/g,"");
+function matchProduct(fn){const base=fn.replace(/\.[^.]+$/,"");
+  if(/^\s*\d+\s*$/.test(base))return P.find(x=>x.id===+base);
+  const b=slug(base);let best=null;
+  for(const x of P){const n=slug(x.name);if(b.includes(n)&&(!best||n.length>slug(best.name).length))best=x}
+  if(best)return best;
+  const m=base.match(/^\s*(\d+)[\s_\-.]/);return m?P.find(x=>x.id===+m[1]):null}
+function markDirty(){store.set("zz_dirty",true);chip()}
+function saveDraft(){store.set("zz_products",P);markDirty()}
+function chip(){const c=$("#adChip");if(!c)return;const d=store.get("zz_dirty",false);c.textContent=d?"● Unpublished changes":"✓ All changes published";c.className="ad-chip "+(d?"dirty":"ok")}
+function refreshStore(){
+  MATS.length=0;MATS.push(...new Set(P.map(p=>p.mat)));
+  $("#materials").innerHTML=MATS.map((m,i)=>`<label class="chk"><input type="checkbox" id="mat${i}" data-mat="${m}"${st.mats.has(m)?" checked":""}> ${m}</label>`).join("");
+  const np=Math.max(7000,Math.ceil(Math.max(0,...P.map(p=>p.price))/500)*500);if(st.max===PMAX)st.max=np;PMAX=np;$("#price").max=PMAX;
+  fixRefs();hi=Math.min(hi,SL.length-1);
+  $("#hbar").innerHTML=SL.map((_,i)=>`<button data-hs="${i}" aria-label="Slide ${i+1}"><i></i></button>`).join("");
+  syncUI();refreshArt();saveCart(false)}
+$("#adCat").innerHTML='<option value="">All categories</option>'+CATS.map(c=>`<option>${c}</option>`).join("");
+function adminList(){
+  if($("#admin").hidden)return;chip();
+  const q=$("#adQ").value.trim().toLowerCase(),c=$("#adCat").value;
+  const list=P.filter(x=>(!c||x.cat===c)&&(!q||(x.name+" "+x.cat+" "+x.mat).toLowerCase().includes(q))).sort((a,b)=>a.new-b.new||b.id-a.id);
+  $("#adStat").textContent=P.length+" products · "+P.filter(x=>x.stock===0).length+" sold out · "+P.filter(x=>!(PH[x.id]||PIMG[x.id])).length+" without a photo";
+  $("#adList").innerHTML=list.length?list.map(x=>{const has=PH[x.id]||PIMG[x.id];
+    return `<div class="adc" data-id="${x.id}"><div class="adi">${art(x,COLORS[x.colors[0]])}${x.new<=2?'<span class="adst new">New</span>':""}${has?"":'<span class="adst none">No photo</span>'}</div>
+    <div class="adm-info"><b>${x.name}</b><small>${x.cat} · ${INR(x.price)}${x.mrp>x.price?" <s>"+INR(x.mrp)+"</s>":""}</small><small>${x.stock===0?"Sold out":x.stock+" in stock"}</small></div>
+    <div class="adm-btns"><button class="btn" data-edit="${x.id}">Edit</button><label class="btn line">${has?"Change photo":"Add photo"}<input type="file" accept="image/*" data-up="${x.id}" hidden></label><button class="btn line" data-del="${x.id}" aria-label="Delete ${x.name}">Delete</button></div></div>`}).join(""):'<p style="color:var(--muted)">No products match. Use “Add new product” to create one.</p>'}
+function showTab(t){document.querySelectorAll(".ad-tabs button").forEach(b=>b.classList.toggle("on",b.dataset.tab===t));$("#adP").hidden=t!=="products";$("#adS").hidden=t!=="publish";if(t==="products")adminList();else loadGh()}
+document.querySelectorAll(".ad-tabs button").forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
+const ADM_HASH="#"+ADMIN_KEY;
+const sGet=()=>{try{return sessionStorage.getItem("zz_unlock")==="1"}catch(e){return false}};
+const sSet=v=>{try{v?sessionStorage.setItem("zz_unlock","1"):sessionStorage.removeItem("zz_unlock")}catch(e){}};
+const hexOf=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");
+async function pbk(pw,saltHex,it){const k=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveBits"]);
+  return hexOf(await crypto.subtle.deriveBits({name:"PBKDF2",hash:"SHA-256",salt:new Uint8Array(saltHex.match(/../g).map(x=>parseInt(x,16))),iterations:it},k,256))}
+const authCur=()=>store.get("zz_auth",null)||ADMIN_AUTH;
+let pwFails=0,pwWait=0;
+function openAdmin(){$("#admin").hidden=false;document.body.classList.add("adm");
+  if(sGet()){$("#admin").classList.remove("locked");$("#adMsg").textContent="";showTab("products");$("#adAdd").focus()}
+  else{$("#admin").classList.add("locked");$("#adPw").value="";$("#adLockErr").textContent="";setTimeout(()=>$("#adPw").focus(),60)}}
+$("#adLockForm").onsubmit=async e=>{e.preventDefault();const err=$("#adLockErr");
+  if(Date.now()<pwWait){err.textContent="Too many tries. Wait a few seconds and try again.";return}
+  if(!(window.crypto&&crypto.subtle)){err.textContent="This browser can't check passwords here. Open the site with https://.";return}
+  let ok=false;try{const a=authCur();ok=(await pbk($("#adPw").value,a.s,a.i))===a.h}catch(x){}
+  if(ok){pwFails=0;sSet(true);$("#adPw").value="";openAdmin()}
+  else{pwFails++;pwWait=Date.now()+Math.min(30000,1000*2**pwFails);err.textContent="That password isn't right.";$("#adPw").select()}};
+$("#adLockClose").onclick=()=>closeAdmin();
+$("#adLockBtn").onclick=()=>{sSet(false);closeAdmin();toast("Dashboard locked")};
+$("#pwSave").onclick=async()=>{const a=$("#pwNew").value,b=$("#pwNew2").value;
+  if(a.length<8){log("Use at least 8 characters.","err");return}if(a!==b){log("The two passwords don't match.","err");return}
+  const salt=hexOf(crypto.getRandomValues(new Uint8Array(16))),it=150000;
+  store.set("zz_auth",{s:salt,h:await pbk(a,salt,it),i:it});markDirty();$("#pwNew").value=$("#pwNew2").value="";
+  log("Password changed. Press Publish now so it works on every computer.","ok")};
+function closeAdmin(){$("#admin").hidden=true;document.body.classList.remove("adm");closeForm();if(location.hash===ADM_HASH)history.replaceState(null,"",location.pathname+location.search)}
+$("#adClose").onclick=closeAdmin;
+addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#admin").hidden){if(!$("#adForm").hidden)closeForm();else closeAdmin()}});
+addEventListener("hashchange",()=>{if(location.hash===ADM_HASH)openAdmin()});
+$("#adQ").oninput=adminList;$("#adCat").onchange=adminList;
+
+// --- add / edit form ---
+let formPhoto;
+function closeForm(){$("#adForm").hidden=true;$("#adForm").innerHTML=""}
+function openForm(id){
+  const p=id?P.find(x=>x.id===id):null;
+  const d=p||{name:"",cat:CATS[0],mat:"",price:"",mrp:"",colors:[],stock:10,dim:"",fits:"",new:99};
+  formPhoto=undefined;
+  const mats=[...new Set(P.map(x=>x.mat))],has=p&&(PH[p.id]||PIMG[p.id]);
+  $("#adForm").hidden=false;
+  $("#adForm").innerHTML=`<div class="adf-bg" data-close></div><form class="adf" id="adf" novalidate>
+   <div class="adf-h"><h3>${p?"Edit product":"Add new product"}</h3><button type="button" class="ib" data-close aria-label="Close">✕</button></div>
+   <div class="adf-b">
+    <div class="adf-ph"><div class="adi" id="afPrev">${p?art(p,COLORS[p.colors[0]]):'<span style="color:var(--muted);font-size:12px">No photo yet</span>'}</div>
+     <div><label class="btn line" style="display:inline-block">Choose photo<input type="file" id="afFile" accept="image/*" hidden></label><button type="button" class="btn line" id="afRm"${has?"":" hidden"}>Remove photo</button><p class="hint">Upright photos (4:5) look best. JPG, PNG or WebP.</p></div></div>
+    <label>Product name<input id="afName" maxlength="60" value="${esc(d.name)}" autocomplete="off"></label>
+    <div class="row2"><label>Category<select id="afCat">${CATS.map(c=>`<option${c===d.cat?" selected":""}>${c}</option>`).join("")}</select></label>
+     <label>Material<input id="afMat" list="afMats" maxlength="40" value="${esc(d.mat)}" autocomplete="off"><datalist id="afMats">${mats.map(m=>`<option value="${esc(m)}">`).join("")}</datalist></label></div>
+    <div class="row2"><label>Selling price (₹)<input id="afPrice" type="number" min="1" inputmode="numeric" value="${d.price}"></label>
+     <label>Original price (₹) <small>(optional)</small><input id="afMrp" type="number" min="1" inputmode="numeric" value="${p&&p.mrp>p.price?p.mrp:""}" placeholder="Shows a discount"></label></div>
+    <div><span class="lbl">Colours <small style="color:var(--muted)">(tap to select)</small></span><div class="chips" id="afCols">${Object.entries(COLORS).map(([n,h])=>`<button type="button" class="chipc" data-c="${n}" aria-pressed="${d.colors.includes(n)}"><i style="background:${h}"></i>${n}</button>`).join("")}</div></div>
+    <div class="row2"><label>Stock (pieces)<input id="afStock" type="number" min="0" inputmode="numeric" value="${d.stock}"></label>
+     <label class="tick"><input type="checkbox" id="afNew"${d.new<=2?" checked":""}> Show as new arrival</label></div>
+    <label>Size <small>(optional)</small><input id="afDim" maxlength="40" value="${esc(p&&p.dim!=="—"?p.dim:"")}" placeholder="40 × 32 × 14 cm"></label>
+    <label>Holds / best for <small>(optional)</small><input id="afFits" maxlength="50" value="${esc(p&&p.fits!=="—"?p.fits:"")}" placeholder="Fits 14&quot; laptop"></label>
+    <div class="err" id="afErr" role="alert"></div></div>
+   <div class="adf-f"><button class="btn" type="submit">${p?"Save changes":"Add product"}</button><button type="button" class="btn line" data-close>Cancel</button></div></form>`;
+  $("#adf").dataset.id=id||"";$("#afName").focus()}
+$("#adAdd").onclick=()=>openForm(null);
+$("#adForm").addEventListener("click",e=>{
+  if(e.target.closest("[data-close]"))return closeForm();
+  const c=e.target.closest(".chipc");if(c)c.setAttribute("aria-pressed",c.getAttribute("aria-pressed")!=="true");
+  if(e.target.id==="afRm"){formPhoto="";$("#afPrev").innerHTML='<span style="color:var(--muted);font-size:12px">No photo</span>';e.target.hidden=true}});
+$("#adForm").addEventListener("change",async e=>{if(e.target.id!=="afFile"||!e.target.files[0])return;
+  const f=e.target.files[0];if(!f.type.startsWith("image/")){$("#afErr").textContent="Choose an image file (JPG, PNG or WebP).";return}
+  try{formPhoto=await shrink(f);$("#afPrev").innerHTML=`<span class="ph"><img src="${formPhoto}" alt="Preview"></span>`;$("#afRm").hidden=false;$("#afErr").textContent=""}catch(err){$("#afErr").textContent="That image couldn't be read. Try another file."}});
+$("#adForm").addEventListener("submit",e=>{e.preventDefault();
+  const v=i=>$("#"+i).value,old=$("#adf").dataset.id?P.find(x=>x.id===+$("#adf").dataset.id):null;
+  const name=cleanQ(v("afName")),mat=cleanQ(v("afMat")).replace(/'/g,""),price=Math.round(+v("afPrice")),stock=Math.max(0,Math.round(+v("afStock")||0));
+  let mrp=Math.round(+v("afMrp"))||price;if(mrp<price)mrp=price;
+  const cols=[...document.querySelectorAll("#afCols .chipc")].filter(b=>b.getAttribute("aria-pressed")==="true").map(b=>b.dataset.c);
+  const err=!name?"Please enter the product name.":!mat?"Please enter the material.":!(price>0)?"Please enter the selling price.":!cols.length?"Pick at least one colour.":"";
+  if(err){$("#afErr").textContent=err;return}
+  const isNew=$("#afNew").checked,others=P.filter(x=>x!==old),mn=others.length?Math.min(...others.map(x=>x.new)):1,mx=others.length?Math.max(...others.map(x=>x.new)):1;
+  const nr=old&&((old.new<=2)===isNew)?old.new:isNew?Math.min(mn-1,2):Math.max(mx,2)+1;
+  const data={name,cat:v("afCat"),mat,price,mrp,colors:cols,stock,dim:cleanT(v("afDim"))||"—",fits:cleanT(v("afFits"))||"—",new:nr};
+  let prod=old;
+  if(old)Object.assign(old,data);else{const id=Math.max(0,...P.map(x=>x.id),...PREM,...Object.keys(PIMG).map(Number),...Object.keys(PH).map(Number))+1;prod={id,rate:0,rev:0,pop:50,...data};P.push(prod)}
+  if(formPhoto){PH[prod.id]=formPhoto;PREM=PREM.filter(x=>x!==prod.id);savePrem()}
+  else if(formPhoto===""){delete PH[prod.id];if(PIMG[prod.id]){delete PIMG[prod.id];PREM.push(prod.id);savePrem()}}
+  savePhotos();saveDraft();closeForm();refreshStore();toast(old?"Changes saved":"Product added. Press Publish when you're ready.")});
+function delProduct(id){const p=P.find(x=>x.id===id);if(!p||!confirm("Delete “"+p.name+"”?"))return;
+  P.splice(P.indexOf(p),1);delete PH[id];if(PIMG[id]){delete PIMG[id];PREM.push(id);savePrem()}savePhotos();saveDraft();refreshStore();toast("Product deleted")}
+$("#adList").addEventListener("click",e=>{const ed=e.target.closest("[data-edit]"),dl=e.target.closest("[data-del]");if(ed)openForm(+ed.dataset.edit);if(dl)delProduct(+dl.dataset.del)});
+["dragover","dragenter"].forEach(ev=>$("#adList").addEventListener(ev,e=>{const c=e.target.closest(".adc");if(!c)return;e.preventDefault();c.classList.add("over")}));
+$("#adList").addEventListener("dragleave",e=>{const c=e.target.closest(".adc");if(c&&!c.contains(e.relatedTarget))c.classList.remove("over")});
+$("#adList").addEventListener("drop",async e=>{const c=e.target.closest(".adc");if(!c)return;e.preventDefault();c.classList.remove("over");
+  const id=+c.dataset.id;if(await setPhoto(id,e.dataTransfer.files[0])){markDirty();savePhotos();toast("Photo added to "+P.find(x=>x.id===id).name)}refreshArt()});
+async function bulk(files){let ok=0,miss=[];
+  for(const f of files){const p=matchProduct(f.name);if(!p||!f.type.startsWith("image/")){miss.push(f.name);continue}if(await setPhoto(p.id,f))ok++;else miss.push(f.name)}
+  if(ok)markDirty();savePhotos();refreshArt();
+  $("#adMsg").textContent=(ok?"Added "+ok+" photo"+(ok>1?"s":"")+". ":"")+(miss.length?"Couldn't match: "+miss.join(", ")+". Rename them to the product number or name and try again.":"")}
+const dz=$("#adDrop");["dragover","dragenter"].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add("over")}));
+["dragleave","drop"].forEach(ev=>dz.addEventListener(ev,()=>dz.classList.remove("over")));
+dz.addEventListener("drop",e=>{e.preventDefault();bulk([...e.dataTransfer.files])});
+$("#adBulk").onchange=e=>{bulk([...e.target.files]);e.target.value=""};
+
+// --- publishing ---
+function buildFile(){
+  const v="v"+Date.now().toString(36),imgs={};
+  P.forEach(p=>{const u=PH[p.id]||PIMG[p.id];if(u)imgs[p.id]=u});
+  const j=o=>JSON.stringify(o).replace(/</g,"\\u003c");
+  let h=SRC.replace(/const DATA_V="[^"]*";/,()=>'const DATA_V="'+v+'";');
+  h=h.replace(/const P=\[[\s\S]*?\n\];/,()=>"const P=[\n"+P.map(p=>" "+j(p)).join(",\n")+"\n];");
+  h=h.replace(/const PIMG=\{[\s\S]*?\};;/,()=>"const PIMG="+j(imgs)+";;");
+  h=h.replace(/const ADMIN_AUTH=\{[^}]*\};/,()=>"const ADMIN_AUTH="+JSON.stringify(authCur())+";");
+  return h}
+const b64=str=>{const b=new TextEncoder().encode(str);let s="";for(let i=0;i<b.length;i+=32768)s+=String.fromCharCode.apply(null,b.subarray(i,i+32768));return btoa(s)};
+const ghGet=()=>({repo:"bhushan18600-lang/Zipzapbags",branch:"main",path:"index.html",token:"",...store.get("zz_gh",{})});
+function loadGh(){const g=ghGet();$("#ghRepo").value=g.repo;$("#ghBranch").value=g.branch;$("#ghPath").value=g.path;$("#ghToken").value=g.token}
+function readGh(){return {repo:$("#ghRepo").value.trim().replace(/^https?:\/\/github\.com\//,"").replace(/\.git$/,"").replace(/\/$/,""),branch:$("#ghBranch").value.trim()||"main",path:$("#ghPath").value.trim().replace(/^\//,"")||"index.html",token:$("#ghToken").value.trim()}}
+const log=(m,k="")=>{$("#adLog").textContent=m;$("#adLog").className=k};
+function ghErr(r){return r.status===401?"GitHub didn't accept the access token. It may be wrong or expired. Create a new one and save it again.":r.status===403?"The token isn't allowed to change this repository. Make sure Contents is set to Read and write.":r.status===404?"GitHub couldn't find that repository or file. Check the repository name (owner/name) and that the token was given access to it.":r.status===409||r.status===422?"The file changed on GitHub while publishing. Press Publish once more.":"GitHub returned an error ("+r.status+"). Try again in a minute."}
+const ghH=g=>({Authorization:"Bearer "+g.token,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"});
+const ghUrl=g=>"https://api.github.com/repos/"+g.repo+"/contents/"+g.path.split("/").map(encodeURIComponent).join("/");
+$("#ghSave").onclick=()=>{store.set("zz_gh",readGh());log("Setup saved.","ok")};
+$("#ghTest").onclick=async()=>{const g=readGh();store.set("zz_gh",g);if(!g.token){log("Paste your access token first.","err");return}
+  log("Checking…");try{const r=await fetch(ghUrl(g)+"?ref="+encodeURIComponent(g.branch),{headers:ghH(g)});log(r.ok?"Connected. Publishing is ready.":ghErr(r),r.ok?"ok":"err")}catch(e){log("Couldn't reach GitHub. Check your internet connection.","err")}};
+async function publish(){
+  const g=ghGet();if(!g.token||!g.repo){showTab("publish");log("Do the one-time setup below first, then press Publish again.","err");return}
+  const btns=[$("#adPub"),$("#adPub2")];btns.forEach(b=>{b.disabled=true;b.textContent="Publishing…"});log("Publishing… this can take a few seconds.");
+  try{
+    const html=buildFile(),u=ghUrl(g);let sha;
+    const r0=await fetch(u+"?ref="+encodeURIComponent(g.branch),{headers:ghH(g)});
+    if(r0.ok)sha=(await r0.json()).sha;else if(r0.status!==404)throw r0;
+    const r=await fetch(u,{method:"PUT",headers:{...ghH(g),"Content-Type":"application/json"},body:JSON.stringify({message:"Update products from dashboard",content:b64(html),branch:g.branch,...(sha?{sha}:{})})});
+    if(!r.ok)throw r;
+    store.set("zz_dirty",false);chip();
+    log("Published at "+new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})+". Your website will show the changes in 1–2 minutes.","ok");toast("Published!")
+  }catch(e){log(e&&e.status?ghErr(e):"Couldn't reach GitHub. Check your internet connection.","err")}
+  btns.forEach(b=>{b.disabled=false;b.textContent="Publish to website"})}
+$("#adPub").onclick=publish;$("#adPub2").onclick=publish;
+$("#adDl").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([buildFile()],{type:"text/html"}));a.download="index.html";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);store.set("zz_dirty",false);chip();log("Downloaded. Upload it to GitHub as index.html to publish.","ok")};
+if(location.hash===ADM_HASH)openAdmin();
+slide(0);render();saveCart(false);drawRecent();
+</script>
+
+</body></html>
